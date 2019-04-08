@@ -92,7 +92,7 @@ export default class SignalAreas{
             for(var i in signals){
                 if(signals[i] !== null){
                     for(var j in signals[i]){
-                        if(signals[i][j] === 2 || signals[i][j] ===6){
+                        if(signals[i][j] === 2 || signals[i][j] === 6){
                             this.canvasHolder[2].drawFullCircle(i);
                             this.canvasHolder[6].drawFullCircle(i);
                             style = this.createStyle(2);
@@ -152,7 +152,7 @@ export default class SignalAreas{
                 anchorXUnits: 'fraction',
                 anchorYUnits: 'pixel',
                 imgSize: [300, 300],
-                scale: 0.6
+                scale: 0.7
             })
         });
         return this.style;

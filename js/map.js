@@ -2,15 +2,16 @@ import {fetchData} from './fetchData.js';
 // import {drawCircle} from './canvas.js';
 import SignalAreas from './SignalAreas.js';
 
-var map;
 var Summit_Warren;
 var Norfolk_Warren;
 var Lock_Warren;
 var First_Street_West_Market;
 var WestMarket_Warren;
 var vectorSource;
+var vectorLayer;
 var signal_phases;
 var SIGNAL_COLORS = [];
+var features = {};
 
 var url = ["http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Summit_Warren",
             "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Lock_Warren",
@@ -30,6 +31,12 @@ const west_market_warren_signals = [2,3,4];
 vectorSource = new ol.source.Vector({
     projection: 'EPSG:3857'
 });
+
+// adding the vector source to vector layer
+vectorLayer = new ol.layer.Vector({
+    source: vectorSource
+});
+
 
 // Street signal lon lats
 Summit_Warren = {
@@ -102,7 +109,7 @@ function initMap(){
         layers: [
             new ol.layer.Tile({
                 source: new ol.source.OSM()
-            })
+            }), vectorLayer
         ],
         view: new ol.View({
             center: center,
@@ -114,19 +121,10 @@ function initMap(){
 
 function LayDataOnMap(){
     vectorSource.clear();
-    var features = {};
-
+    features = {};
     createNewFeatures(features);
     addColorToFeatures(features);
     addFeaturesToVectorSource(features);
-    
-    // creating a vector layer that holds the vector source
-    var vectorLayer = new ol.layer.Vector({
-        source: vectorSource
-    });
-
-    // Adding vector layer to map
-    map.addLayer(vectorLayer);
 }
 
 function createNewFeatures(features){
@@ -204,7 +202,7 @@ function repeatingLoop(){
 
 
 function main(){
-    map = initMap();
+    initMap();
     repeatingLoop();
 }
 

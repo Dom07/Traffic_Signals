@@ -11,7 +11,7 @@ export default class SignalCanvas{
         this.canvas.setAttribute('width',this.size);
         this.canvas.setAttribute('height',this.size);
         this.canvas.setAttribute('id',this.name);
-        // document.body.appendChild(this.canvas)
+        // document.body.appendChild(this.canvas)   
         this.ctx = this.canvas.getContext('2d');
         this.centerX = this.size/2;
         this.centerY = this.size/4;
