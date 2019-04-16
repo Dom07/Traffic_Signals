@@ -22,7 +22,7 @@ const lock_warren_signals = [2,4,6,8];
 const norfolk_warren_signals = [2,4,6,8];
 const first_street_west_market_signals = [2,3,6,7];
 const west_market_warren_signals = [2,3,4];
-const hudson_warren_signals = [2,3,4,5]
+const hudson_warren_signals = [2,3,4]
 
 // source file that holds the features, which are added below
 vectorSource = new ol.source.Vector({
@@ -72,8 +72,7 @@ const WestMarket_Warren = {
 const Hudson_Warren = {
     2: ol.proj.fromLonLat([-74.186172, 40.743599]), // incoming from right
     3: ol.proj.fromLonLat([-74.186329, 40.743652]), // incming from left
-    4: ol.proj.fromLonLat([-74.186238, 40.743702]), // incoming from top
-    5: ol.proj.fromLonLat([-74.186281, 40.743558]) // incoming from bottom
+    4: ol.proj.fromLonLat([-74.186281, 40.743558]) // incoming from bottom
 }
 
 var summitWStreet = new SignalAreas("summit_warren", summit_warren_signals, Summit_Warren)

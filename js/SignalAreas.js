@@ -153,11 +153,8 @@ export default class SignalAreas{
                             features[this.streetName+3].setStyle(style2)
                         }else if(signals[i][j] === 4){
                             this.canvasHolder[4].drawFullCircle(i)
-                            this.canvasHolder[5].drawFullCircle(i)
                             style = this.createStyle(4)
-                            style2 = this.createStyle(5)
                             features[this.streetName+4].setStyle(style)
-                            features[this.streetName+5].setStyle(style2)
                         }
                     }
                 }
