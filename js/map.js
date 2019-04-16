@@ -152,38 +152,6 @@ function addFeaturesToVectorSource(features){
     addFeatureToVectorSource(westMarketWarren, features);
 }
 
-function addColorToFeaturesXYZ(features){
-
-    // summit warren signals with timer experiment
-    var signals = signal_phases[0];
-    var remaining_time = summit_remaining_time[0];
-    // console.log(signals)
-    for(var i in signals){
-        if(signals[i] !== null){
-            for(var j in signals[i]){
-                if(signals[i][j]!==1 && signals[i][j]!==8){
-                    if(i==1){
-                        var temp_canvas = canvasObjList[i].drawCircle(0,1);
-                    }else{
-                        var temp_canvas = canvasObjList[i].drawCircle(remaining_time[i][j], i);
-                    }
-                    var style = new ol.style.Style({
-                        image: new ol.style.Icon({
-                            img: temp_canvas,
-                            anchor: [0.5, 80],
-                            anchorXUnits: 'fraction',
-                            anchorYUnits: 'pixel',
-                            imgSize: [300, 300],
-                            scale: 0.5
-                        })
-                    });
-                    features[STREET_NAMES[0]+signals[i][j]].setStyle(style);
-                }
-            }
-        }
-    }
-}
-
 function addFeatureToVectorSource(signalAreaObj, features){
     for(var i in signalAreaObj.signalPositions){
         vectorSource.addFeature(features[signalAreaObj.streetName+signalAreaObj.signalPositions[i]]);
