@@ -140,6 +140,28 @@ export default class SignalAreas{
                     }
                 }
             }
+        }else if(this.getStreetName() === "hudson_warren"){
+            for(var i in signals){
+                if(signals[i] !== null){
+                    for(var j in signals[i]){
+                        if(signals[i][j] === 2){
+                            this.canvasHolder[2].drawFullCircle(i)
+                            this.canvasHolder[3].drawFullCircle(i)
+                            style = this.createStyle(2)
+                            style2 = this.createStyle(3)
+                            features[this.streetName+2].setStyle(style)
+                            features[this.streetName+3].setStyle(style2)
+                        }else if(signals[i][j] === 4){
+                            this.canvasHolder[4].drawFullCircle(i)
+                            this.canvasHolder[5].drawFullCircle(i)
+                            style = this.createStyle(4)
+                            style2 = this.createStyle(5)
+                            features[this.streetName+4].setStyle(style)
+                            features[this.streetName+5].setStyle(style2)
+                        }
+                    }
+                }
+            }
         }
         return features;
     }
