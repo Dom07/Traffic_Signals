@@ -1,5 +1,4 @@
 import {fetchData} from './fetchData.js';
-// import {drawCircle} from './canvas.js';
 import SignalAreas from './SignalAreas.js';
 
 var vectorSource;
@@ -14,6 +13,7 @@ var url = ["http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileNa
             "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=First_WestMarket",
             "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=WestMarket_Warren",
             "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Hudson_Warren",
+            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=University_Raymond",
         ];
 
 // Available Signals
@@ -22,7 +22,8 @@ const lock_warren_signals = [2,4,6,8];
 const norfolk_warren_signals = [2,4,6,8];
 const first_street_west_market_signals = [2,3,6,7];
 const west_market_warren_signals = [2,3,4];
-const hudson_warren_signals = [2,3,4]
+const hudson_warren_signals = [2,3,4];
+const university_raymond_signals = [2,3,4];
 
 // source file that holds the features, which are added below
 vectorSource = new ol.source.Vector({
@@ -75,13 +76,19 @@ const Hudson_Warren = {
     4: ol.proj.fromLonLat([-74.186281, 40.743558]) // incoming from bottom
 }
 
+const University_Raymond = {
+    2: ol.proj.fromLonLat([-74.175305, 40.738738]),
+    3: ol.proj.fromLonLat([-74.175475, 40.738788]),
+    4: ol.proj.fromLonLat([ -74.175346, 40.738866])
+}
+
 var summitWStreet = new SignalAreas("summit_warren", summit_warren_signals, Summit_Warren)
 var lockWStreet = new SignalAreas("lock_warren", lock_warren_signals, Lock_Warren)
 var norfolWStreet = new SignalAreas( "norfolk_warren", norfolk_warren_signals, Norfolk_Warren)
 var firstStreetWestMarket = new SignalAreas("first_street_west_market", first_street_west_market_signals, First_Street_West_Market);
 var westMarketWarren = new SignalAreas("west_market_warren", west_market_warren_signals, WestMarket_Warren);
 var hudsonWarren = new SignalAreas("hudson_warren", hudson_warren_signals, Hudson_Warren);
-
+var universityRaymond = new SignalAreas("university_raymond", university_raymond_signals, University_Raymond);
 // signal colors 
 // index    color
 // 0        gree
@@ -107,7 +114,7 @@ SIGNAL_COLORS[2] = new ol.style.Style({
 
 // NJIT -74.181345,40.742047
 function initMap(){
-    var center = ol.proj.fromLonLat([-74.187815, 40.744200]);
+    var center = ol.proj.fromLonLat([-74.175305,40.738748]);
     const map = new ol.Map({
         target: 'map',
         layers: [
@@ -138,6 +145,7 @@ function createNewFeatures(features){
     firstStreetWestMarket.createNewIconFeature(features);
     westMarketWarren.createNewIconFeature(features);
     hudsonWarren.createNewIconFeature(features);
+    universityRaymond.createNewIconFeature(features);
 }
 
 function addColorToFeatures(features){
@@ -147,6 +155,7 @@ function addColorToFeatures(features){
     firstStreetWestMarket.addColorToFeatures(features, signal_phases[3], SIGNAL_COLORS);
     westMarketWarren.addColorToFeatures(features, signal_phases[4], SIGNAL_COLORS);
     hudsonWarren.addColorToFeatures(features, signal_phases[5], SIGNAL_COLORS);
+    universityRaymond.addColorToFeatures(features, signal_phases[6], SIGNAL_COLORS);
 }
 
 function addFeaturesToVectorSource(features){
@@ -156,6 +165,7 @@ function addFeaturesToVectorSource(features){
     addFeatureToVectorSource(firstStreetWestMarket, features);
     addFeatureToVectorSource(westMarketWarren, features);
     addFeatureToVectorSource(hudsonWarren, features);
+    addFeatureToVectorSource(universityRaymond, features);
 }
 
 function addFeatureToVectorSource(signalAreaObj, features){

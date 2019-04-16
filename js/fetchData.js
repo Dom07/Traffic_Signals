@@ -5,6 +5,7 @@ var norfolk_warren_signal_phases;
 var first_street_west_market;
 var west_market_warren;
 var hudson_warren;
+var university_raymond;
 var signal_remaining_time;
 var summit_remaining_time;
 
@@ -64,6 +65,11 @@ export function fetchData(url){
         }
     })
     
+    getJSON(url[6],function(err,data){
+        if(err===null){
+            university_raymond = [data[0].CurGreenPhase, data[0].CurYellowPhase, data[0].CurRedPhase];
+        }
+    })
     
     signal_phases.push(Summit_Signal_Phases);
     signal_phases.push(Lock_warren_signal_phases);
@@ -71,7 +77,7 @@ export function fetchData(url){
     signal_phases.push(first_street_west_market);
     signal_phases.push(west_market_warren);
     signal_phases.push(hudson_warren);
-
+    signal_phases.push(university_raymond);
     // signal_remaining_time.push(summit_remaining_time);
     
     return signal_phases;

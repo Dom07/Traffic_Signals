@@ -24,12 +24,12 @@ export default class SignalAreas{
         return this.lonLatMapping;
     }
 
-    createNewFeature(features){
-        for (var i in this.signalPositions){
-            features[this.streetName+this.signalPositions[i]] = new ol.Feature(new ol.geom.Circle(this.lonLatMapping[this.signalPositions[i]] ,4));
-        }
-        return features;
-    }
+    // createNewFeature(features){
+    //     for (var i in this.signalPositions){
+    //         features[this.streetName+this.signalPositions[i]] = new ol.Feature(new ol.geom.Circle(this.lonLatMapping[this.signalPositions[i]] ,4));
+    //     }
+    //     return features;
+    // }
 
     createNewIconFeature(features){
         for(var i in this.signalPositions){
@@ -141,6 +141,25 @@ export default class SignalAreas{
                 }
             }
         }else if(this.getStreetName() === "hudson_warren"){
+            for(var i in signals){
+                if(signals[i] !== null){
+                    for(var j in signals[i]){
+                        if(signals[i][j] === 2){
+                            this.canvasHolder[2].drawFullCircle(i)
+                            this.canvasHolder[3].drawFullCircle(i)
+                            style = this.createStyle(2)
+                            style2 = this.createStyle(3)
+                            features[this.streetName+2].setStyle(style)
+                            features[this.streetName+3].setStyle(style2)
+                        }else if(signals[i][j] === 4){
+                            this.canvasHolder[4].drawFullCircle(i)
+                            style = this.createStyle(4)
+                            features[this.streetName+4].setStyle(style)
+                        }
+                    }
+                }
+            }
+        }else if(this.getStreetName() === "university_raymond"){
             for(var i in signals){
                 if(signals[i] !== null){
                     for(var j in signals[i]){
