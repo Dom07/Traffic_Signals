@@ -178,6 +178,27 @@ export default class SignalAreas{
                     }
                 }
             }
+        }else if(this.getStreetName() === "washington_raymond"){
+            for(var i in signals){
+                if(signals[i] !== null){
+                    for(var j in signals[i]){
+                        if(signals[i][j] === 2){
+                            this.canvasHolder[2].drawFullCircle(i)
+                            this.canvasHolder[3].drawFullCircle(i)
+                            style = this.createStyle(2)
+                            style2 = this.createStyle(3)
+                            features[this.streetName+2].setStyle(style)
+                            features[this.streetName+3].setStyle(style2)
+                        }else if(signals[i][j] === 4){
+                            this.canvasHolder[4].drawFullCircle(i)
+                            style = this.createStyle(4)
+                            features[this.streetName+4].setStyle(style)
+                        }
+                    }
+                }
+            }
+        }else{
+            console.log("lol")
         }
         return features;
     }

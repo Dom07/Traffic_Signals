@@ -14,6 +14,7 @@ var url = ["http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileNa
             "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=WestMarket_Warren",
             "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Hudson_Warren",
             "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=University_Raymond",
+            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Washington_Raymond"
         ];
 
 // Available Signals
@@ -24,6 +25,7 @@ const first_street_west_market_signals = [2,3,6,7];
 const west_market_warren_signals = [2,3,4];
 const hudson_warren_signals = [2,3,4];
 const university_raymond_signals = [2,3,4];
+const washington_raymond_signals  = [2,3,4];
 
 // source file that holds the features, which are added below
 vectorSource = new ol.source.Vector({
@@ -77,9 +79,15 @@ const Hudson_Warren = {
 }
 
 const University_Raymond = {
-    2: ol.proj.fromLonLat([-74.175305, 40.738738]),
-    3: ol.proj.fromLonLat([-74.175475, 40.738788]),
-    4: ol.proj.fromLonLat([ -74.175346, 40.738866])
+    2: ol.proj.fromLonLat([-74.175305, 40.738738]), // incoming from right
+    3: ol.proj.fromLonLat([-74.175475, 40.738788]), // incoming from left
+    4: ol.proj.fromLonLat([ -74.175346, 40.738866]) // incoming from top
+}
+
+const Washington_Raymond = {
+    2: ol.proj.fromLonLat([-74.173726, 40.738241]),
+    3: ol.proj.fromLonLat([-74.173898, 40.738290]),
+    4: ol.proj.fromLonLat([-74.173867, 40.738174])
 }
 
 var summitWStreet = new SignalAreas("summit_warren", summit_warren_signals, Summit_Warren)
@@ -89,6 +97,8 @@ var firstStreetWestMarket = new SignalAreas("first_street_west_market", first_st
 var westMarketWarren = new SignalAreas("west_market_warren", west_market_warren_signals, WestMarket_Warren);
 var hudsonWarren = new SignalAreas("hudson_warren", hudson_warren_signals, Hudson_Warren);
 var universityRaymond = new SignalAreas("university_raymond", university_raymond_signals, University_Raymond);
+var washingtonRaymond = new SignalAreas("washington_raymond", washington_raymond_signals, Washington_Raymond);
+
 // signal colors 
 // index    color
 // 0        gree
@@ -114,7 +124,7 @@ SIGNAL_COLORS[2] = new ol.style.Style({
 
 // NJIT -74.181345,40.742047
 function initMap(){
-    var center = ol.proj.fromLonLat([-74.175305,40.738748]);
+    var center = ol.proj.fromLonLat([-74.173736, 40.738251]);
     const map = new ol.Map({
         target: 'map',
         layers: [
@@ -146,6 +156,7 @@ function createNewFeatures(features){
     westMarketWarren.createNewIconFeature(features);
     hudsonWarren.createNewIconFeature(features);
     universityRaymond.createNewIconFeature(features);
+    washingtonRaymond.createNewIconFeature(features);
 }
 
 function addColorToFeatures(features){
@@ -156,6 +167,7 @@ function addColorToFeatures(features){
     westMarketWarren.addColorToFeatures(features, signal_phases[4], SIGNAL_COLORS);
     hudsonWarren.addColorToFeatures(features, signal_phases[5], SIGNAL_COLORS);
     universityRaymond.addColorToFeatures(features, signal_phases[6], SIGNAL_COLORS);
+    washingtonRaymond.addColorToFeatures(features, signal_phases[7], SIGNAL_COLORS);
 }
 
 function addFeaturesToVectorSource(features){
@@ -166,6 +178,7 @@ function addFeaturesToVectorSource(features){
     addFeatureToVectorSource(westMarketWarren, features);
     addFeatureToVectorSource(hudsonWarren, features);
     addFeatureToVectorSource(universityRaymond, features);
+    addFeatureToVectorSource(washingtonRaymond, features);
 }
 
 function addFeatureToVectorSource(signalAreaObj, features){
