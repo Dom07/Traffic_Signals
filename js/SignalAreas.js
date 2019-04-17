@@ -259,37 +259,73 @@ export default class SignalAreas{
                 }
             }
         }else if(this.getStreetName() === "mullberry_raymond"){
-                for(var i in signals){
-                    if(signals[i] !== null){
-                        for(var j in signals[i]){
-                            if(signals[i][j] === 2){
-                                this.canvasHolder[2].drawRightDiagOfCircle(i)
-                                style = this.createStyle(2)
-                                features[this.streetName+2].setStyle(style)
-                            }else if(signals[i][j] === 3){
-                                this.canvasHolder[8].drawLeftHalfOfCircle(i)
-                                style = this.createStyle(8)
-                                features[this.streetName+8].setStyle(style)
-                            }else if(signals[i][j] === 4){
-                                this.canvasHolder[4].drawFullCircle(i)
-                                style = this.createStyle(4)
-                                features[this.streetName+4].setStyle(style)
-                            }else if(signals[i][j] === 5){
-                                this.canvasHolder[2].drawLeftDiagOfCircle(i)
-                                style = this.createStyle(2)
-                                features[this.streetName+2].setStyle(style)
-                            }else if(signals[i][j] === 6){
-                                this.canvasHolder[6].drawFullCircle(i)
-                                style = this.createStyle(6)
-                                features[this.streetName+6].setStyle(style)
-                            }else if(signals[i][j] === 8){
-                                this.canvasHolder[8].drawRightHalfOfCircle(i)
-                                style = this.createStyle(8)
-                                features[this.streetName+8].setStyle(style)
-                            }
+            for(var i in signals){
+                if(signals[i] !== null){
+                    for(var j in signals[i]){
+                        if(signals[i][j] === 2){
+                            this.canvasHolder[2].drawRightDiagOfCircle(i)
+                            style = this.createStyle(2)
+                            features[this.streetName+2].setStyle(style)
+                        }else if(signals[i][j] === 3){
+                            this.canvasHolder[8].drawLeftHalfOfCircle(i)
+                            style = this.createStyle(8)
+                            features[this.streetName+8].setStyle(style)
+                        }else if(signals[i][j] === 4){
+                            this.canvasHolder[4].drawFullCircle(i)
+                            style = this.createStyle(4)
+                            features[this.streetName+4].setStyle(style)
+                        }else if(signals[i][j] === 5){
+                            this.canvasHolder[2].drawLeftDiagOfCircle(i)
+                            style = this.createStyle(2)
+                            features[this.streetName+2].setStyle(style)
+                        }else if(signals[i][j] === 6){
+                            this.canvasHolder[6].drawFullCircle(i)
+                            style = this.createStyle(6)
+                            features[this.streetName+6].setStyle(style)
+                        }else if(signals[i][j] === 8){
+                            this.canvasHolder[8].drawRightHalfOfCircle(i)
+                            style = this.createStyle(8)
+                            features[this.streetName+8].setStyle(style)
                         }
                     }
                 }
+            }
+        }else if(this.getStreetName() === "mccarter_raymond"){
+            for(var i in signals){
+                if(signals[i] !== null){
+                    for(var j in signals[i]){
+                        if(signals[i][j] === 2){
+                            this.canvasHolder[2].drawRightHalfOfCircle(i)
+                            style = this.createStyle(2)
+                            features[this.streetName+2].setStyle(style)
+                        }else if(signals[i][j] === 3){
+                            this.canvasHolder[8].drawLeftDiagOfCircle(i)
+                            style = this.createStyle(8)
+                            features[this.streetName+8].setStyle(style)
+                        }else if(signals[i][j] === 4){
+                            this.canvasHolder[4].drawFullCircle(i)
+                            style = this.createStyle(4)
+                            features[this.streetName+4].setStyle(style)
+                        }else if(signals[i][j] === 5){
+                            this.canvasHolder[2].drawLeftHalfOfCircle(i)
+                            style = this.createStyle(2)
+                            features[this.streetName+2].setStyle(style)
+                        }else if(signals[i][j] === 6){
+                            this.canvasHolder[6].drawLeftHalfOfCircle(i)
+                            style = this.createStyle(6)
+                            features[this.streetName+6].setStyle(style)
+                        }else if(signals[i][j] === 1){
+                            this.canvasHolder[6].drawRightHalfOfCircle(i)
+                            style = this.createStyle(6)
+                            features[this.streetName+6].setStyle(style)
+                        }else if(signals[i][j] === 8){
+                            this.canvasHolder[8].drawLeftDiagOfCircle(i)
+                            style = this.createStyle(8)
+                            features[this.streetName+8].setStyle(style)
+                        }
+                    }
+                }
+            }
         }else{
             console.log("LOL")
         }

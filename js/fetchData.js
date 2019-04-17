@@ -11,6 +11,7 @@ var halsey_raymond;
 var broad_raymond;
 var commerce_raymond;
 var mullbery_raymond;
+var mccarter_raymond;
 var signal_remaining_time;
 var summit_remaining_time;
 
@@ -105,6 +106,12 @@ export function fetchData(url){
             mullbery_raymond = [data[0].CurGreenPhase, data[0].CurYellowPhase, data[0].CurRedPhase];
         }
     })
+
+    getJSON(url[12],function(err,data){
+        if(err===null){
+            mccarter_raymond = [data[0].CurGreenPhase, data[0].CurYellowPhase, data[0].CurRedPhase];
+        }
+    })
     
     
     signal_phases.push(Summit_Signal_Phases);
@@ -119,6 +126,7 @@ export function fetchData(url){
     signal_phases.push(broad_raymond);
     signal_phases.push(commerce_raymond);
     signal_phases.push(mullbery_raymond);
+    signal_phases.push(mccarter_raymond);
     // signal_remaining_time.push(summit_remaining_time);
     
     return signal_phases;

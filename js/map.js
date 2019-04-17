@@ -18,7 +18,8 @@ var url = ["http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileNa
             "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Halsey_Raymond",
             "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Broad_Raymond",
             "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Commerce_Raymond",
-            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Mullberry_Raymond"
+            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Mullberry_Raymond",
+            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=McCarter_Raymond"
         ];
 
 // Available Signals
@@ -34,6 +35,7 @@ const halsey_raymond_signals = [2,3,4];
 const broad_raymond_signals = [2,3,4,5];
 const commerce_raymond_signals = [2,6];
 const mullberry_raymond_signals = [2,4,6,8];
+const mccarter_raymond_signals = [2,4,6,8];
 
 // source file that holds the features, which are added below
 vectorSource = new ol.source.Vector({
@@ -123,6 +125,13 @@ const Mullberry_Raymond = {
     8: ol.proj.fromLonLat([-74.168114, 40.736575])
 }
 
+const McCarter_Raymond = {
+    2: ol.proj.fromLonLat([-74.165857, 40.735859]),
+    4: ol.proj.fromLonLat([-74.165719, 40.735878]),
+    6: ol.proj.fromLonLat([-74.165805, 40.736034]),
+    8: ol.proj.fromLonLat([-74.165928, 40.735953])
+}
+
 var summitWStreet = new SignalAreas("summit_warren", summit_warren_signals, Summit_Warren)
 var lockWStreet = new SignalAreas("lock_warren", lock_warren_signals, Lock_Warren)
 var norfolWStreet = new SignalAreas( "norfolk_warren", norfolk_warren_signals, Norfolk_Warren)
@@ -135,6 +144,7 @@ var halseyRaymond = new SignalAreas("halsey_raymond", halsey_raymond_signals, Ha
 var broadRaymond = new SignalAreas("broad_raymond", broad_raymond_signals, Broad_Raymond);
 var commerceRaymond = new SignalAreas("commerce_raymond", commerce_raymond_signals, Commerce_Raymond);
 var mullberryRaymond = new SignalAreas("mullberry_raymond", mullberry_raymond_signals, Mullberry_Raymond);
+var mccarterRaymond = new SignalAreas("mccarter_raymond",mccarter_raymond_signals, McCarter_Raymond);
 // signal colors 
 // index    color
 // 0        gree
@@ -160,7 +170,7 @@ SIGNAL_COLORS[2] = new ol.style.Style({
 
 // NJIT -74.181345,40.742047
 function initMap(){
-    var center = ol.proj.fromLonLat([-74.169769, 40.737168]);
+    var center = ol.proj.fromLonLat([-74.181345,40.742047]);
     const map = new ol.Map({
         target: 'map',
         layers: [
@@ -197,6 +207,7 @@ function createNewFeatures(features){
     broadRaymond.createNewIconFeature(features);
     commerceRaymond.createNewIconFeature(features);
     mullberryRaymond.createNewIconFeature(features);
+    mccarterRaymond.createNewIconFeature(features);
 }
 
 function addColorToFeatures(features){
@@ -212,6 +223,7 @@ function addColorToFeatures(features){
     broadRaymond.addColorToFeatures(features, signal_phases[9], SIGNAL_COLORS);
     commerceRaymond.addColorToFeatures(features, signal_phases[10], SIGNAL_COLORS);
     mullberryRaymond.addColorToFeatures(features, signal_phases[11], SIGNAL_COLORS);
+    mccarterRaymond.addColorToFeatures(features, signal_phases[12],SIGNAL_COLORS);
 }
 
 function addFeaturesToVectorSource(features){
@@ -227,6 +239,7 @@ function addFeaturesToVectorSource(features){
     addFeatureToVectorSource(broadRaymond, features);
     addFeatureToVectorSource(commerceRaymond, features);
     addFeatureToVectorSource(mullberryRaymond, features);
+    addFeatureToVectorSource(mccarterRaymond, features);
 }
 
 function addFeatureToVectorSource(signalAreaObj, features){
