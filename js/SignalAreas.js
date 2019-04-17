@@ -216,6 +216,48 @@ export default class SignalAreas{
                     }
                 }
             }
+        }else if(this.getStreetName() === "broad_raymond"){
+            for(var i in signals){
+                if(signals[i] !== null){
+                    for(var j in signals[i]){
+                        if(signals[i][j] === 2){
+                            this.canvasHolder[2].drawFullCircle(i)
+                            this.canvasHolder[3].drawFullCircle(i)
+                            style = this.createStyle(2)
+                            style2 = this.createStyle(3)
+                            features[this.streetName+2].setStyle(style)
+                            features[this.streetName+3].setStyle(style2)
+                        }else if(signals[i][j] === 4){
+                            this.canvasHolder[4].drawFullCircle(i)
+                            this.canvasHolder[5].drawFullCircle(i)
+                            style = this.createStyle(4)
+                            style2 = this.createStyle(5)
+                            features[this.streetName+4].setStyle(style)
+                            features[this.streetName+5].setStyle(style2)
+                        }
+                    }
+                }
+            }
+        }else if(this.getStreetName() === "commerce_raymond"){
+            for(var i in signals){
+                if(signals[i] !== null){
+                    for(var j in signals[i]){
+                        if(signals[i][j] === 2){
+                            this.canvasHolder[2].drawFullCircle(i)
+                            style = this.createStyle(2)
+                            features[this.streetName+2].setStyle(style)
+                        }else if(signals[i][j] === 1){
+                            this.canvasHolder[6].drawTopHalfOfCircle(i)
+                            style = this.createStyle(6)
+                            features[this.streetName+6].setStyle(style)
+                        }else if(signals[i][j] === 6){
+                            this.canvasHolder[6].drawBottomHalfOfCircle(i)
+                            style = this.createStyle(6)
+                            features[this.streetName+6].setStyle(style)
+                        }
+                    }
+                }
+            }
         }else{
             console.log("LOL")
         }

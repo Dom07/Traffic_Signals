@@ -15,7 +15,9 @@ var url = ["http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileNa
             "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Hudson_Warren",
             "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=University_Raymond",
             "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Washington_Raymond",
-            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Halsey_Raymond"
+            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Halsey_Raymond",
+            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Broad_Raymond",
+            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Commerce_Raymond"
         ];
 
 // Available Signals
@@ -28,6 +30,8 @@ const hudson_warren_signals = [2,3,4];
 const university_raymond_signals = [2,3,4];
 const washington_raymond_signals  = [2,3,4];
 const halsey_raymond_signals = [2,3,4];
+const broad_raymond_signals = [2,3,4,5];
+const commerce_raymond_signals = [2,6];
 
 // source file that holds the features, which are added below
 vectorSource = new ol.source.Vector({
@@ -93,9 +97,21 @@ const Washington_Raymond = {
 }
 
 const Halsey_Raymond = {
-    2: ol.proj.fromLonLat([-74.172580, 40.737919]),
-    3: ol.proj.fromLonLat([-74.172717, 40.737950]),
-    4: ol.proj.fromLonLat([-74.172599, 40.738017])
+    2: ol.proj.fromLonLat([-74.172584, 40.737908]),
+    3: ol.proj.fromLonLat([-74.172718, 40.737946]),
+    4: ol.proj.fromLonLat([-74.172605, 40.737983])
+}
+
+const Broad_Raymond = {
+    2: ol.proj.fromLonLat([-74.170743, 40.737423]), // incoming from right
+    3: ol.proj.fromLonLat([-74.171124, 40.737480]), // incoming from left
+    4: ol.proj.fromLonLat([-74.170990, 40.737522]),
+    5: ol.proj.fromLonLat([-74.171062, 40.737398])
+}
+
+const Commerce_Raymond = {
+    2: ol.proj.fromLonLat([-74.169775, 40.737152]),
+    6: ol.proj.fromLonLat([-74.169630, 40.737107])
 }
 
 var summitWStreet = new SignalAreas("summit_warren", summit_warren_signals, Summit_Warren)
@@ -107,6 +123,9 @@ var hudsonWarren = new SignalAreas("hudson_warren", hudson_warren_signals, Hudso
 var universityRaymond = new SignalAreas("university_raymond", university_raymond_signals, University_Raymond);
 var washingtonRaymond = new SignalAreas("washington_raymond", washington_raymond_signals, Washington_Raymond);
 var halseyRaymond = new SignalAreas("halsey_raymond", halsey_raymond_signals, Halsey_Raymond);
+var broadRaymond = new SignalAreas("broad_raymond", broad_raymond_signals, Broad_Raymond);
+var commerceRaymond = new SignalAreas("commerce_raymond", commerce_raymond_signals, Commerce_Raymond);
+
 // signal colors 
 // index    color
 // 0        gree
@@ -132,7 +151,7 @@ SIGNAL_COLORS[2] = new ol.style.Style({
 
 // NJIT -74.181345,40.742047
 function initMap(){
-    var center = ol.proj.fromLonLat([-74.173736, 40.738251]);
+    var center = ol.proj.fromLonLat([-74.169769, 40.737168]);
     const map = new ol.Map({
         target: 'map',
         layers: [
@@ -166,6 +185,8 @@ function createNewFeatures(features){
     universityRaymond.createNewIconFeature(features);
     washingtonRaymond.createNewIconFeature(features);
     halseyRaymond.createNewIconFeature(features);
+    broadRaymond.createNewIconFeature(features);
+    commerceRaymond.createNewIconFeature(features);
 }
 
 function addColorToFeatures(features){
@@ -178,6 +199,8 @@ function addColorToFeatures(features){
     universityRaymond.addColorToFeatures(features, signal_phases[6], SIGNAL_COLORS);
     washingtonRaymond.addColorToFeatures(features, signal_phases[7], SIGNAL_COLORS);
     halseyRaymond.addColorToFeatures(features, signal_phases[8], SIGNAL_COLORS);
+    broadRaymond.addColorToFeatures(features, signal_phases[9], SIGNAL_COLORS);
+    commerceRaymond.addColorToFeatures(features, signal_phases[10], SIGNAL_COLORS);
 }
 
 function addFeaturesToVectorSource(features){
@@ -190,6 +213,8 @@ function addFeaturesToVectorSource(features){
     addFeatureToVectorSource(universityRaymond, features);
     addFeatureToVectorSource(washingtonRaymond, features);
     addFeatureToVectorSource(halseyRaymond, features);
+    addFeatureToVectorSource(broadRaymond, features);
+    addFeatureToVectorSource(commerceRaymond, features);
 }
 
 function addFeatureToVectorSource(signalAreaObj, features){

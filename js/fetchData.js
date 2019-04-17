@@ -8,6 +8,8 @@ var hudson_warren;
 var university_raymond;
 var washington_raymond;
 var halsey_raymond;
+var broad_raymond;
+var commerce_raymond;
 var signal_remaining_time;
 var summit_remaining_time;
 
@@ -84,6 +86,18 @@ export function fetchData(url){
             halsey_raymond = [data[0].CurGreenPhase, data[0].CurYellowPhase, data[0].CurRedPhase];
         }
     })
+
+    getJSON(url[9],function(err,data){
+        if(err===null){
+            broad_raymond = [data[0].CurGreenPhase, data[0].CurYellowPhase, data[0].CurRedPhase];
+        }
+    })
+
+    getJSON(url[10],function(err,data){
+        if(err===null){
+            commerce_raymond = [data[0].CurGreenPhase, data[0].CurYellowPhase, data[0].CurRedPhase];
+        }
+    })
     
     
     signal_phases.push(Summit_Signal_Phases);
@@ -95,6 +109,8 @@ export function fetchData(url){
     signal_phases.push(university_raymond);
     signal_phases.push(washington_raymond);
     signal_phases.push(halsey_raymond);
+    signal_phases.push(broad_raymond);
+    signal_phases.push(commerce_raymond);
     // signal_remaining_time.push(summit_remaining_time);
     
     return signal_phases;
