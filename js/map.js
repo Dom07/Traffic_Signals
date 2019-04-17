@@ -17,7 +17,8 @@ var url = ["http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileNa
             "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Washington_Raymond",
             "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Halsey_Raymond",
             "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Broad_Raymond",
-            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Commerce_Raymond"
+            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Commerce_Raymond",
+            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Mullberry_Raymond"
         ];
 
 // Available Signals
@@ -32,6 +33,7 @@ const washington_raymond_signals  = [2,3,4];
 const halsey_raymond_signals = [2,3,4];
 const broad_raymond_signals = [2,3,4,5];
 const commerce_raymond_signals = [2,6];
+const mullberry_raymond_signals = [2,4,6,8];
 
 // source file that holds the features, which are added below
 vectorSource = new ol.source.Vector({
@@ -114,6 +116,13 @@ const Commerce_Raymond = {
     6: ol.proj.fromLonLat([-74.169630, 40.737107])
 }
 
+const Mullberry_Raymond = {
+    2: ol.proj.fromLonLat([-74.168008, 40.736618]),
+    4: ol.proj.fromLonLat([-74.168031, 40.736725]),
+    6: ol.proj.fromLonLat([-74.168147, 40.736658]),
+    8: ol.proj.fromLonLat([-74.168114, 40.736575])
+}
+
 var summitWStreet = new SignalAreas("summit_warren", summit_warren_signals, Summit_Warren)
 var lockWStreet = new SignalAreas("lock_warren", lock_warren_signals, Lock_Warren)
 var norfolWStreet = new SignalAreas( "norfolk_warren", norfolk_warren_signals, Norfolk_Warren)
@@ -125,7 +134,7 @@ var washingtonRaymond = new SignalAreas("washington_raymond", washington_raymond
 var halseyRaymond = new SignalAreas("halsey_raymond", halsey_raymond_signals, Halsey_Raymond);
 var broadRaymond = new SignalAreas("broad_raymond", broad_raymond_signals, Broad_Raymond);
 var commerceRaymond = new SignalAreas("commerce_raymond", commerce_raymond_signals, Commerce_Raymond);
-
+var mullberryRaymond = new SignalAreas("mullberry_raymond", mullberry_raymond_signals, Mullberry_Raymond);
 // signal colors 
 // index    color
 // 0        gree
@@ -187,6 +196,7 @@ function createNewFeatures(features){
     halseyRaymond.createNewIconFeature(features);
     broadRaymond.createNewIconFeature(features);
     commerceRaymond.createNewIconFeature(features);
+    mullberryRaymond.createNewIconFeature(features);
 }
 
 function addColorToFeatures(features){
@@ -201,6 +211,7 @@ function addColorToFeatures(features){
     halseyRaymond.addColorToFeatures(features, signal_phases[8], SIGNAL_COLORS);
     broadRaymond.addColorToFeatures(features, signal_phases[9], SIGNAL_COLORS);
     commerceRaymond.addColorToFeatures(features, signal_phases[10], SIGNAL_COLORS);
+    mullberryRaymond.addColorToFeatures(features, signal_phases[11], SIGNAL_COLORS);
 }
 
 function addFeaturesToVectorSource(features){
@@ -215,6 +226,7 @@ function addFeaturesToVectorSource(features){
     addFeatureToVectorSource(halseyRaymond, features);
     addFeatureToVectorSource(broadRaymond, features);
     addFeatureToVectorSource(commerceRaymond, features);
+    addFeatureToVectorSource(mullberryRaymond, features);
 }
 
 function addFeatureToVectorSource(signalAreaObj, features){
