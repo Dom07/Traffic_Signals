@@ -68,7 +68,69 @@ const norfolk_warren_rotation_angles = {
     8: 0.1
 }
 
-// 
+const first_street_west_market_rotation_angles = {
+    2: 0,
+    3: 0,
+    6: 0,
+    7: 0
+}
+
+const west_market_warren_rotation_angles = {
+    2: 0, // incoming from top
+    3: 0, // incoming from right
+    4: 0 // incoming from bottom
+}
+
+const hudson_warren_rotation_angles = {
+    2: 0, // incoming from right
+    3: 0, // incming from left
+    4: 0 // incoming from bottom
+}
+
+const university_raymond_rotation_angles = {
+    2: 0, // incoming from right
+    3: 0, // incoming from left
+    4: 0 // incoming from top
+}
+
+const washington_raymond_rotation_angles = {
+    2: 0,
+    3: 0,
+    4: 0
+}
+
+const halsey_raymond_rotation_angles = {
+    2: 0,
+    3: 0,
+    4: 0
+}
+
+const broad_raymond_rotation_angles = {
+    2: 0, // incoming from right
+    3: 0, // incoming from left
+    4: 0,
+    5: 0
+}
+
+const commerce_raymond_rotation_angles = {
+    2: 0,
+    6: 0
+}
+
+const mullberry_raymond_rotation_angles = {
+    2: 0,
+    4: 0,
+    6: 0,
+    8: 0
+}
+
+const mccarter_raymond_rotation_angles = {
+    2: 0,
+    4: 0,
+    6: 0,
+    8: 0
+}
+
 // Street signal lon lats
 const Summit_Warren = {
     2:ol.proj.fromLonLat([-74.178686, 40.741117]), // incoming from left
@@ -156,16 +218,17 @@ const McCarter_Raymond = {
 var summitWStreet = new SignalAreas("summit_warren", summit_warren_signals, Summit_Warren, summit_warren_rotation_angles)
 var lockWStreet = new SignalAreas("lock_warren", lock_warren_signals, Lock_Warren, lock_warren_rotation_angles)
 var norfolWStreet = new SignalAreas( "norfolk_warren", norfolk_warren_signals, Norfolk_Warren, norfolk_warren_rotation_angles)
-// var firstStreetWestMarket = new SignalAreas("first_street_west_market", first_street_west_market_signals, First_Street_West_Market);
-// var westMarketWarren = new SignalAreas("west_market_warren", west_market_warren_signals, WestMarket_Warren);
-// var hudsonWarren = new SignalAreas("hudson_warren", hudson_warren_signals, Hudson_Warren);
-// var universityRaymond = new SignalAreas("university_raymond", university_raymond_signals, University_Raymond);
-// var washingtonRaymond = new SignalAreas("washington_raymond", washington_raymond_signals, Washington_Raymond);
-// var halseyRaymond = new SignalAreas("halsey_raymond", halsey_raymond_signals, Halsey_Raymond);
-// var broadRaymond = new SignalAreas("broad_raymond", broad_raymond_signals, Broad_Raymond);
-// var commerceRaymond = new SignalAreas("commerce_raymond", commerce_raymond_signals, Commerce_Raymond);
-// var mullberryRaymond = new SignalAreas("mullberry_raymond", mullberry_raymond_signals, Mullberry_Raymond);
-// var mccarterRaymond = new SignalAreas("mccarter_raymond",mccarter_raymond_signals, McCarter_Raymond);
+var firstStreetWestMarket = new SignalAreas("first_street_west_market", first_street_west_market_signals, First_Street_West_Market, first_street_west_market_rotation_angles);
+var westMarketWarren = new SignalAreas("west_market_warren", west_market_warren_signals, WestMarket_Warren, west_market_warren_rotation_angles);
+var hudsonWarren = new SignalAreas("hudson_warren", hudson_warren_signals, Hudson_Warren, hudson_warren_rotation_angles);
+var universityRaymond = new SignalAreas("university_raymond", university_raymond_signals, University_Raymond, university_raymond_rotation_angles);
+var washingtonRaymond = new SignalAreas("washington_raymond", washington_raymond_signals, Washington_Raymond, washington_raymond_rotation_angles);
+var halseyRaymond = new SignalAreas("halsey_raymond", halsey_raymond_signals, Halsey_Raymond, halsey_raymond_rotation_angles);
+var broadRaymond = new SignalAreas("broad_raymond", broad_raymond_signals, Broad_Raymond, broad_raymond_rotation_angles);
+var commerceRaymond = new SignalAreas("commerce_raymond", commerce_raymond_signals, Commerce_Raymond, commerce_raymond_rotation_angles);
+var mullberryRaymond = new SignalAreas("mullberry_raymond", mullberry_raymond_signals, Mullberry_Raymond, mullberry_raymond_rotation_angles);
+var mccarterRaymond = new SignalAreas("mccarter_raymond",mccarter_raymond_signals, McCarter_Raymond, mccarter_raymond_rotation_angles);
+
 // signal colors 
 // index    color
 // 0        gree
@@ -219,48 +282,48 @@ function createNewFeatures(features){
     summitWStreet.createNewIconFeature(features);
     lockWStreet.createNewIconFeature(features);
     norfolWStreet.createNewIconFeature(features);   
-    // firstStreetWestMarket.createNewIconFeature(features);
-    // westMarketWarren.createNewIconFeature(features);
-    // hudsonWarren.createNewIconFeature(features);
-    // universityRaymond.createNewIconFeature(features);
-    // washingtonRaymond.createNewIconFeature(features);
-    // halseyRaymond.createNewIconFeature(features);
-    // broadRaymond.createNewIconFeature(features);
-    // commerceRaymond.createNewIconFeature(features);
-    // mullberryRaymond.createNewIconFeature(features);
-    // mccarterRaymond.createNewIconFeature(features);
+    firstStreetWestMarket.createNewIconFeature(features);
+    westMarketWarren.createNewIconFeature(features);
+    hudsonWarren.createNewIconFeature(features);
+    universityRaymond.createNewIconFeature(features);
+    washingtonRaymond.createNewIconFeature(features);
+    halseyRaymond.createNewIconFeature(features);
+    broadRaymond.createNewIconFeature(features);
+    commerceRaymond.createNewIconFeature(features);
+    mullberryRaymond.createNewIconFeature(features);
+    mccarterRaymond.createNewIconFeature(features);
 }
 
 function addColorToFeatures(features){
     summitWStreet.addColorToFeatures(features, signal_phases[0], SIGNAL_COLORS);
     lockWStreet.addColorToFeatures(features, signal_phases[1],SIGNAL_COLORS);
     norfolWStreet.addColorToFeatures(features, signal_phases[2], SIGNAL_COLORS);
-    // firstStreetWestMarket.addColorToFeatures(features, signal_phases[3], SIGNAL_COLORS);
-    // westMarketWarren.addColorToFeatures(features, signal_phases[4], SIGNAL_COLORS);
-    // hudsonWarren.addColorToFeatures(features, signal_phases[5], SIGNAL_COLORS);
-    // universityRaymond.addColorToFeatures(features, signal_phases[6], SIGNAL_COLORS);
-    // washingtonRaymond.addColorToFeatures(features, signal_phases[7], SIGNAL_COLORS);
-    // halseyRaymond.addColorToFeatures(features, signal_phases[8], SIGNAL_COLORS);
-    // broadRaymond.addColorToFeatures(features, signal_phases[9], SIGNAL_COLORS);
-    // commerceRaymond.addColorToFeatures(features, signal_phases[10], SIGNAL_COLORS);
-    // mullberryRaymond.addColorToFeatures(features, signal_phases[11], SIGNAL_COLORS);
-    // mccarterRaymond.addColorToFeatures(features, signal_phases[12],SIGNAL_COLORS);
+    firstStreetWestMarket.addColorToFeatures(features, signal_phases[3], SIGNAL_COLORS);
+    westMarketWarren.addColorToFeatures(features, signal_phases[4], SIGNAL_COLORS);
+    hudsonWarren.addColorToFeatures(features, signal_phases[5], SIGNAL_COLORS);
+    universityRaymond.addColorToFeatures(features, signal_phases[6], SIGNAL_COLORS);
+    washingtonRaymond.addColorToFeatures(features, signal_phases[7], SIGNAL_COLORS);
+    halseyRaymond.addColorToFeatures(features, signal_phases[8], SIGNAL_COLORS);
+    broadRaymond.addColorToFeatures(features, signal_phases[9], SIGNAL_COLORS);
+    commerceRaymond.addColorToFeatures(features, signal_phases[10], SIGNAL_COLORS);
+    mullberryRaymond.addColorToFeatures(features, signal_phases[11], SIGNAL_COLORS);
+    mccarterRaymond.addColorToFeatures(features, signal_phases[12],SIGNAL_COLORS);
 }
 
 function addFeaturesToVectorSource(features){
     addFeatureToVectorSource(summitWStreet, features);
     addFeatureToVectorSource(lockWStreet, features);
     addFeatureToVectorSource(norfolWStreet, features);
-    // addFeatureToVectorSource(firstStreetWestMarket, features);
-    // addFeatureToVectorSource(westMarketWarren, features);
-    // addFeatureToVectorSource(hudsonWarren, features);
-    // addFeatureToVectorSource(universityRaymond, features);
-    // addFeatureToVectorSource(washingtonRaymond, features);
-    // addFeatureToVectorSource(halseyRaymond, features);
-    // addFeatureToVectorSource(broadRaymond, features);
-    // addFeatureToVectorSource(commerceRaymond, features);
-    // addFeatureToVectorSource(mullberryRaymond, features);
-    // addFeatureToVectorSource(mccarterRaymond, features);
+    addFeatureToVectorSource(firstStreetWestMarket, features);
+    addFeatureToVectorSource(westMarketWarren, features);
+    addFeatureToVectorSource(hudsonWarren, features);
+    addFeatureToVectorSource(universityRaymond, features);
+    addFeatureToVectorSource(washingtonRaymond, features);
+    addFeatureToVectorSource(halseyRaymond, features);
+    addFeatureToVectorSource(broadRaymond, features);
+    addFeatureToVectorSource(commerceRaymond, features);
+    addFeatureToVectorSource(mullberryRaymond, features);
+    addFeatureToVectorSource(mccarterRaymond, features);
 }
 
 function addFeatureToVectorSource(signalAreaObj, features){
