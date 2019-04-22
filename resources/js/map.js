@@ -82,9 +82,9 @@ const west_market_warren_rotation_angles = {
 }
 
 const hudson_warren_rotation_angles = {
-    2: 0, // incoming from right
-    3: 0, // incming from left
-    4: 0 // incoming from bottom
+    2: 0.12, // incoming from right
+    3: 1.12, // incming from left
+    4: 0.6 // incoming from bottom
 }
 
 const university_raymond_rotation_angles = {

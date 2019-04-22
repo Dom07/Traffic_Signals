@@ -151,15 +151,16 @@ export default class SignalAreas{
                 if(signals[i] !== null){
                     for(var j in signals[i]){
                         if(signals[i][j] === 2){
-                            this.canvasHolder[2].drawFullCircle(i)
-                            this.canvasHolder[3].drawFullCircle(i)
-                            style = this.createStyle(2)
-                            style2 = this.createStyle(3)
+                            // this.canvasHolder[2].drawFullCircle(i)
+                            // this.canvasHolder[3].drawFullCircle(i)
+                            style = this.createImageStyle(this.SignalColorImagesWithLeft[i], 2)
                             features[this.streetName+2].setStyle(style)
-                            features[this.streetName+3].setStyle(style2)
+                            style = this.createImageStyle(this.SignalColorImagesWithLeft[i], 3)
+                            features[this.streetName+3].setStyle(style) 
                         }else if(signals[i][j] === 4){
-                            this.canvasHolder[4].drawFullCircle(i)
-                            style = this.createStyle(4)
+                            // this.canvasHolder[4].drawFullCircle(i)
+                            style = this.createImageStyle(this.SignalColorImagesWithLeft[i], 4)
+                            // style = this.createStyle(4)
                             features[this.streetName+4].setStyle(style)
                         }
                     }
