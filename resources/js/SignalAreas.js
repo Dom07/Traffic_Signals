@@ -1,12 +1,15 @@
 import SignalCanvas from "./canvas.js";
 
 export default class SignalAreas{
-    constructor(streetName, signalPositions, lonLatMapping){
+    constructor(streetName, signalPositions, lonLatMapping, rotationAngle){
         this.canvasHolder = {};
         this.style;
         this.streetName = streetName;
         this.signalPositions = signalPositions;
         this.lonLatMapping = lonLatMapping;
+        this.SignalColorImages = ["/resources/images/green_straight.png","/resources/images/yellow_straight.png","/resources/images/red_straight.png"]
+        this.SignalColorImagesWithLeft = ["/resources/images/green_straight_left.png","/resources/images/yellow_straight_left.png","/resources/images/red_straight_left.png"]
+        this.radians = rotationAngle;
         for(var i in this.signalPositions){
             this.canvasHolder[this.signalPositions[i]] = new SignalCanvas(this.streetName+this.signalPositions[i])
         }
@@ -47,8 +50,7 @@ export default class SignalAreas{
                 if(signals[i] !== null){
                     for(var j in signals[i]){
                         if(signals[i][j] !==1 && signals[i][j] !==8){
-                            this.canvasHolder[signals[i][j]].drawFullCircle(i);
-                            style = this.createStyle(signals[i][j]);
+                            style = this.createStyleImage(this.SignalColorImages[i], signals[i][j]);
                             features[this.streetName+signals[i][j]].setStyle(style)
                         }
                     }
@@ -59,12 +61,14 @@ export default class SignalAreas{
                 if(signals[i] !== null){
                     for(var j in signals[i]){
                         if(signals[i][j] !==6 && signals[i][j] !==8){
-                            this.canvasHolder[signals[i][j]].drawFullCircle(i);
-                            style = this.createStyle(signals[i][j]);
+                            // this.canvasHolder[signals[i][j]].drawFullCircle(i);
+                            style = this.createStyleImage(this.SignalColorImagesWithLeft[i], signals[i][j]);
                             features[this.streetName+signals[i][j]].setStyle(style)
                             if(signals[i][j]===2){
+                                style = this.createStyleImage(this.SignalColorImagesWithLeft[i], 6)
                                 features[this.streetName+6].setStyle(style);
                             } else if(signals[i][j]===4){
+                                style = this.createStyleImage(this.SignalColorImagesWithLeft[i], 8)
                                 features[this.streetName+8].setStyle(style);
                             }
                         }
@@ -341,6 +345,23 @@ export default class SignalAreas{
                 anchorYUnits: 'pixel',
                 imgSize: [300, 300],
                 scale: 0.7
+            })
+        });
+        return this.style;
+    }
+
+    createStyleImage(imgSrc, multiplier){
+        this.style = new ol.style.Style({
+            image: new ol.style.Icon({
+                // img: image,
+                anchor : [0.5,0.5],
+                size: [100,98],
+                offset:[0,0],
+                opacity: 1,
+                scale: 0.25,
+                src: imgSrc,
+                rotation: this.radians[multiplier]*Math.PI,
+                // rotation : 1.6*Math.PI
             })
         });
         return this.style;
