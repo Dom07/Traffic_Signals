@@ -50,7 +50,7 @@ export default class SignalAreas{
                 if(signals[i] !== null){
                     for(var j in signals[i]){
                         if(signals[i][j] !==1 && signals[i][j] !==8){
-                            style = this.createStyleImage(this.SignalColorImages[i], signals[i][j]);
+                            style = this.createImageStyle(this.SignalColorImages[i], signals[i][j]);
                             features[this.streetName+signals[i][j]].setStyle(style)
                         }
                     }
@@ -62,13 +62,13 @@ export default class SignalAreas{
                     for(var j in signals[i]){
                         if(signals[i][j] !==6 && signals[i][j] !==8){
                             // this.canvasHolder[signals[i][j]].drawFullCircle(i);
-                            style = this.createStyleImage(this.SignalColorImagesWithLeft[i], signals[i][j]);
+                            style = this.createImageStyle(this.SignalColorImagesWithLeft[i], signals[i][j]);
                             features[this.streetName+signals[i][j]].setStyle(style)
                             if(signals[i][j]===2){
-                                style = this.createStyleImage(this.SignalColorImagesWithLeft[i], 6)
+                                style = this.createImageStyle(this.SignalColorImagesWithLeft[i], 6)
                                 features[this.streetName+6].setStyle(style);
                             } else if(signals[i][j]===4){
-                                style = this.createStyleImage(this.SignalColorImagesWithLeft[i], 8)
+                                style = this.createImageStyle(this.SignalColorImagesWithLeft[i], 8)
                                 features[this.streetName+8].setStyle(style);
                             }
                         }
@@ -80,12 +80,14 @@ export default class SignalAreas{
                 if(signals[i] !== null){
                     for(var j in signals[i]){
                         if(signals[i][j] !==1 && signals[i][j] !==3 && signals[i][j] !== 5 && signals[i][j] !==6 && signals[i][j] !== 7 && signals[i][j] !==8){
-                            this.canvasHolder[signals[i][j]].drawFullCircle(i);
-                            style = this.createStyle(signals[i][j])
+                            // this.canvasHolder[signals[i][j]].drawFullCircle(i);
+                            style = this.createImageStyle(this.SignalColorImagesWithLeft[i], signals[i][j])
                             features[this.streetName+signals[i][j]].setStyle(style)
                             if(signals[i][j]===4){
+                                style = this.createImageStyle(this.SignalColorImagesWithLeft[i], 8)
                                 features[this.streetName+8].setStyle(style);
                             }else if(signals[i][j]===2){
+                                style = this.createImageStyle(this.SignalColorImagesWithLeft[i], 6)
                                 features[this.streetName+6].setStyle(style);    
                             }
                         }
@@ -350,7 +352,7 @@ export default class SignalAreas{
         return this.style;
     }
 
-    createStyleImage(imgSrc, multiplier){
+    createImageStyle(imgSrc, multiplier){
         this.style = new ol.style.Style({
             image: new ol.style.Icon({
                 // img: image,

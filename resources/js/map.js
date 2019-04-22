@@ -61,26 +61,33 @@ const lock_warren_rotation_angles = {
     8:  1.1
 }
 
+const norfolk_warren_rotation_angles = {
+    2: 1.6,
+    4: 1.1,
+    6: 0.6,
+    8: 0.1
+}
 
+// 
 // Street signal lon lats
 const Summit_Warren = {
-    2:ol.proj.fromLonLat([-74.178686, 40.741117]),
-    4:ol.proj.fromLonLat([-74.178671,40.741037]), // ^ // ->
-    6:ol.proj.fromLonLat([-74.178571, 40.741077]), // <-
+    2:ol.proj.fromLonLat([-74.178686, 40.741117]), // incoming from left
+    4:ol.proj.fromLonLat([-74.178671,40.741037]), // incoming from bottom
+    6:ol.proj.fromLonLat([-74.178571, 40.741077]), // incoming from right
 };
 
 const Lock_Warren = {
-    2: ol.proj.fromLonLat([-74.181362,40.742087]), // v
-    4: ol.proj.fromLonLat([-74.181265,40.741980]), // <- 
-    6: ol.proj.fromLonLat([-74.181408, 40.741951]), // ^
-    8: ol.proj.fromLonLat([-74.181472,40.742045]) // ->
+    2: ol.proj.fromLonLat([-74.181362,40.742087]), // incoming from top
+    4: ol.proj.fromLonLat([-74.181265,40.741980]), // incoming from right
+    6: ol.proj.fromLonLat([-74.181408, 40.741951]), // incoming from bottom
+    8: ol.proj.fromLonLat([-74.181472,40.742045]) // incoming from left
 }
 
 const Norfolk_Warren = {
-    2: ol.proj.fromLonLat([-74.184492, 40.743106]), // V 
-    4: ol.proj.fromLonLat([-74.184601, 40.743077]), // ->
-    6: ol.proj.fromLonLat([-74.184546, 40.742997]),
-    8: ol.proj.fromLonLat([-74.184422, 40.743028])
+    2: ol.proj.fromLonLat([-74.184492, 40.743106]), // incoming from top
+    4: ol.proj.fromLonLat([-74.184601, 40.743077]), // incoming from left
+    6: ol.proj.fromLonLat([-74.184546, 40.742997]), // incoming from bottom
+    8: ol.proj.fromLonLat([-74.184422, 40.743028])  // incoming from right
 }
 
 const First_Street_West_Market = {
@@ -148,7 +155,7 @@ const McCarter_Raymond = {
 
 var summitWStreet = new SignalAreas("summit_warren", summit_warren_signals, Summit_Warren, summit_warren_rotation_angles)
 var lockWStreet = new SignalAreas("lock_warren", lock_warren_signals, Lock_Warren, lock_warren_rotation_angles)
-// var norfolWStreet = new SignalAreas( "norfolk_warren", norfolk_warren_signals, Norfolk_Warren)
+var norfolWStreet = new SignalAreas( "norfolk_warren", norfolk_warren_signals, Norfolk_Warren, norfolk_warren_rotation_angles)
 // var firstStreetWestMarket = new SignalAreas("first_street_west_market", first_street_west_market_signals, First_Street_West_Market);
 // var westMarketWarren = new SignalAreas("west_market_warren", west_market_warren_signals, WestMarket_Warren);
 // var hudsonWarren = new SignalAreas("hudson_warren", hudson_warren_signals, Hudson_Warren);
@@ -211,7 +218,7 @@ function LayDataOnMap(){
 function createNewFeatures(features){
     summitWStreet.createNewIconFeature(features);
     lockWStreet.createNewIconFeature(features);
-    // norfolWStreet.createNewIconFeature(features);   
+    norfolWStreet.createNewIconFeature(features);   
     // firstStreetWestMarket.createNewIconFeature(features);
     // westMarketWarren.createNewIconFeature(features);
     // hudsonWarren.createNewIconFeature(features);
@@ -227,7 +234,7 @@ function createNewFeatures(features){
 function addColorToFeatures(features){
     summitWStreet.addColorToFeatures(features, signal_phases[0], SIGNAL_COLORS);
     lockWStreet.addColorToFeatures(features, signal_phases[1],SIGNAL_COLORS);
-    // norfolWStreet.addColorToFeatures(features, signal_phases[2], SIGNAL_COLORS);
+    norfolWStreet.addColorToFeatures(features, signal_phases[2], SIGNAL_COLORS);
     // firstStreetWestMarket.addColorToFeatures(features, signal_phases[3], SIGNAL_COLORS);
     // westMarketWarren.addColorToFeatures(features, signal_phases[4], SIGNAL_COLORS);
     // hudsonWarren.addColorToFeatures(features, signal_phases[5], SIGNAL_COLORS);
@@ -243,7 +250,7 @@ function addColorToFeatures(features){
 function addFeaturesToVectorSource(features){
     addFeatureToVectorSource(summitWStreet, features);
     addFeatureToVectorSource(lockWStreet, features);
-    // addFeatureToVectorSource(norfolWStreet, features);
+    addFeatureToVectorSource(norfolWStreet, features);
     // addFeatureToVectorSource(firstStreetWestMarket, features);
     // addFeatureToVectorSource(westMarketWarren, features);
     // addFeatureToVectorSource(hudsonWarren, features);
