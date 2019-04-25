@@ -94,9 +94,9 @@ const university_raymond_rotation_angles = {
 }
 
 const washington_raymond_rotation_angles = {
-    2: 0,
-    3: 0,
-    4: 0
+    2: 0.1, // incoming from right
+    3: 1.12, // incoming from left 
+    4: 0.6  // incoming from bottom
 }
 
 const halsey_raymond_rotation_angles = {
@@ -254,7 +254,7 @@ SIGNAL_COLORS[2] = new ol.style.Style({
 
 // NJIT -74.181345,40.742047
 function initMap(){
-    var center = ol.proj.fromLonLat([-74.181345,40.742047]);
+    var center = ol.proj.fromLonLat([-74.170743, 40.737423]);
     const map = new ol.Map({
         target: 'map',
         layers: [
