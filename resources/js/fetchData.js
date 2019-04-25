@@ -12,8 +12,8 @@ var broad_raymond;
 var commerce_raymond;
 var mullbery_raymond;
 var mccarter_raymond;
-var signal_remaining_time;
-var summit_remaining_time;
+var signal_color;
+var signal_number;
 
 function getJSON(url, callback) {
     var xhr = new XMLHttpRequest();
@@ -30,14 +30,29 @@ function getJSON(url, callback) {
     xhr.send();
 };
 
+export function fetchSignal(url, signal_number){
+    getJSON(url, function(err,data){
+        if(err===null){
+            var phases = [data[0].CurGreenPhase, data[0].CurYellowPhase, data[0].CurRedPhase];
+            for(var i = 0; i < phases.length; i++){
+                for(var j = 0; j < phases[i].length; j++){
+                    if(phases[i][j] === signal_number){
+                        signal_color = i;
+                        break;
+                    }
+                }
+            }
+        }
+    })
+    return signal_color;
+}
+
 export function fetchData(url){
     signal_phases = [];   
-    signal_remaining_time = [];
+
     getJSON(url[0],function(err,data){
         if(err===null){    
             Summit_Signal_Phases = [data[0].CurGreenPhase, data[0].CurYellowPhase, data[0].CurRedPhase];
-            // summit_remaining_time = [data[0].ReGreen, [], data[0].ReRed];
-            // convertRemainingTime(summit_remaining_time);
         }
     })
 
@@ -132,10 +147,3 @@ export function fetchData(url){
     return signal_phases;
 }
 
-function convertRemainingTime(summit_remaining_time){
-    for(var i=0;i<summit_remaining_time;i++){
-        for(var j=0;j<summit_remaining_time[i];j++){
-            summit_remaining_time[i][j] = summit_remaining_time[i][j] % 1000;
-        }
-    }
-}

@@ -256,7 +256,7 @@ SIGNAL_COLORS[2] = new ol.style.Style({
 
 // NJIT -74.181345,40.742047
 function initMap(){
-    var center = ol.proj.fromLonLat([-74.170743, 40.737423]);
+    var center = ol.proj.fromLonLat([-74.181345,40.742047]);
     const map = new ol.Map({
         target: 'map',
         layers: [
