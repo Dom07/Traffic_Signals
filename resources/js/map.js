@@ -88,9 +88,9 @@ const hudson_warren_rotation_angles = {
 }
 
 const university_raymond_rotation_angles = {
-    2: 0, // incoming from right
-    3: 0, // incoming from left
-    4: 0 // incoming from top
+    2: 0.1, // incoming from right
+    3: 1.12, // incoming from left
+    4: 1.6 // incoming from top
 }
 
 const washington_raymond_rotation_angles = {
