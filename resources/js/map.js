@@ -100,9 +100,9 @@ const washington_raymond_rotation_angles = {
 }
 
 const halsey_raymond_rotation_angles = {
-    2: 0,
-    3: 0,
-    4: 0
+    2: 0.1, // incoming from right
+    3: 1.12, // incoming from left
+    4: 1.6  // incoming from top
 }
 
 const broad_raymond_rotation_angles = {
