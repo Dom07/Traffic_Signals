@@ -69,16 +69,17 @@ const norfolk_warren_rotation_angles = {
 }
 
 const first_street_west_market_rotation_angles = {
-    2: 0,
+    2: 1.6,
     3: 0,
-    6: 0,
+    6: 0.6,
     7: 0
 }
 
 const west_market_warren_rotation_angles = {
-    2: 0, // incoming from top
-    3: 0, // incoming from right
-    4: 0 // incoming from bottom
+    2: 0.7, // incoming from top
+    3: 0.1, // incoming from right
+    4: 0.2, // incoming from bottom
+    // 5: 1.2
 }
 
 const hudson_warren_rotation_angles = {
@@ -113,20 +114,20 @@ const broad_raymond_rotation_angles = {
 }
 
 const commerce_raymond_rotation_angles = {
-    2: 0,
+    2: 1.12,
     6: 0
 }
 
 const mullberry_raymond_rotation_angles = {
     2: 0,
-    4: 0,
-    6: 0,
+    4: 1.7,
+    6: 1.12,
     8: 0
 }
 
 const mccarter_raymond_rotation_angles = {
     2: 0,
-    4: 0,
+    4: 0.1,
     6: 0,
     8: 0
 }
@@ -160,9 +161,10 @@ const First_Street_West_Market = {
 }
 
 const WestMarket_Warren = {
-    2: ol.proj.fromLonLat([-74.187835, 40.744200]), // incoming from top
+    2: ol.proj.fromLonLat([-74.187882, 40.744230]), // incoming from top
     3: ol.proj.fromLonLat([-74.187584, 40.744114]), // incoming from right
-    4: ol.proj.fromLonLat([-74.187378, 40.743888]) // incoming from bottom
+    4: ol.proj.fromLonLat([-74.187378, 40.743888]), // incoming from bottom
+    5: ol.proj.fromLonLat([-74.187835, 40.744180])
 }
 
 const Hudson_Warren = {

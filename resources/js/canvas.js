@@ -50,6 +50,9 @@ export default class SignalCanvas{
         this.drawCircle(1.25, 2.25, color_index)
     }
 
+    drawCustomHalfOfCircle(start, end, color_index){
+        this.drawCircle(start,end, color_index)
+    }
 
     drawFullCircle(color_index){
         this.drawCircle(0, 2, color_index)    

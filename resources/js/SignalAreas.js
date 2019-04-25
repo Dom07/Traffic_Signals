@@ -9,6 +9,7 @@ export default class SignalAreas{
         this.lonLatMapping = lonLatMapping;
         this.SignalColorImages = ["/resources/images/green_straight.png","/resources/images/yellow_straight.png","/resources/images/red_straight.png"]
         this.SignalColorImagesWithLeft = ["/resources/images/green_straight_left.png","/resources/images/yellow_straight_left.png","/resources/images/red_straight_left.png"]
+        this.SignalColorImagesOnlyLeft = ["/resources/images/green_left.png","/resources/images/yellow_left.png","/resources/images/red_left.png"]
         this.radians = rotationAngle;
         for(var i in this.signalPositions){
             this.canvasHolder[this.signalPositions[i]] = new SignalCanvas(this.streetName+this.signalPositions[i])
@@ -99,12 +100,12 @@ export default class SignalAreas{
                 if(signals[i] !== null){
                     for(var j in signals[i]){
                         if(signals[i][j] === 2 || signals[i][j] === 6){
-                            this.canvasHolder[2].drawFullCircle(i);
-                            this.canvasHolder[6].drawFullCircle(i);
-                            style = this.createStyle(2);
-                            style2 = this.createStyle(6);
+                            // this.canvasHolder[2].drawFullCircle(i);
+                            // this.canvasHolder[6].drawFullCircle(i);
+                            style = this.createImageStyle(this.SignalColorImagesWithLeft[i],2);
                             features[this.streetName+2].setStyle(style);
-                            features[this.streetName+6].setStyle(style2);
+                            style = this.createImageStyle(this.SignalColorImagesWithLeft[i],6);
+                            features[this.streetName+6].setStyle(style);
                         } else if(signals[i][j] === 3){
                             this.canvasHolder[signals[i][j]].drawRightDiagOfCircle(i);
                             style = this.createStyle(signals[i][j]);
@@ -130,18 +131,22 @@ export default class SignalAreas{
                     for(var j in signals[i]){
                         if(signals[i][j] === 2){
                             this.canvasHolder[2].drawRightDiagOfCircle(i)
-                            this.canvasHolder[3].drawFullCircle(i)
+                            // this.canvasHolder[3].drawFullCircle(i)
+                            // style = this.createImageStyle(this.SignalColorImages[i], 2)
                             style = this.createStyle(2)
-                            style2 = this.createStyle(3)
                             features[this.streetName+2].setStyle(style)
-                            features[this.streetName+3].setStyle(style2)
+                            style = this.createImageStyle(this.SignalColorImagesWithLeft[i], 3)
+                            // style = this.createStyle(3)
+                            features[this.streetName+3].setStyle(style)
                         }else if(signals[i][j] === 4){
                             this.canvasHolder[2].drawLeftDiagOfCircle(i)
-                            this.canvasHolder[4].drawFullCircle(i)
                             style = this.createStyle(2)
-                            style2 = this.createStyle(4)
                             features[this.streetName+2].setStyle(style)
-                            features[this.streetName+4].setStyle(style2)
+                            // this.canvasHolder[4].drawFullCircle(i)
+                            style = this.createImageStyle(this.SignalColorImages[i],4)
+                            features[this.streetName+4].setStyle(style)
+                            // style = this.createImageStyle(this.SignalColorImages[i],5)
+                            // features[this.streetName+5].setStyle(style)
                         }
                     }
                 }
@@ -250,15 +255,16 @@ export default class SignalAreas{
                 if(signals[i] !== null){
                     for(var j in signals[i]){
                         if(signals[i][j] === 2){
-                            this.canvasHolder[2].drawFullCircle(i)
-                            style = this.createStyle(2)
+                            // this.canvasHolder[2].drawFullCircle(i)
+                            // style = this.createStyle(2)
+                            style = this.createImageStyle(this.SignalColorImages[i], 2)
                             features[this.streetName+2].setStyle(style)
                         }else if(signals[i][j] === 1){
-                            this.canvasHolder[6].drawLeftDiagOfCircle(i)
+                            this.canvasHolder[6].drawCustomHalfOfCircle(0.1,1.1,i)
                             style = this.createStyle(6)
                             features[this.streetName+6].setStyle(style)
                         }else if(signals[i][j] === 6){
-                            this.canvasHolder[6].drawRightDiagOfCircle(i)
+                            this.canvasHolder[6].drawCustomHalfOfCircle(1.1,2.1,i)
                             style = this.createStyle(6)
                             features[this.streetName+6].setStyle(style)
                         }
@@ -270,7 +276,7 @@ export default class SignalAreas{
                 if(signals[i] !== null){
                     for(var j in signals[i]){
                         if(signals[i][j] === 2){
-                            this.canvasHolder[2].drawRightDiagOfCircle(i)
+                            this.canvasHolder[2].drawCustomHalfOfCircle(0.1,1.1,i)
                             style = this.createStyle(2)
                             features[this.streetName+2].setStyle(style)
                         }else if(signals[i][j] === 3){
@@ -278,16 +284,16 @@ export default class SignalAreas{
                             style = this.createStyle(8)
                             features[this.streetName+8].setStyle(style)
                         }else if(signals[i][j] === 4){
-                            this.canvasHolder[4].drawFullCircle(i)
-                            style = this.createStyle(4)
+                            // this.canvasHolder[4].drawFullCircle(i)
+                            style = this.createImageStyle(this.SignalColorImages[i],4)
                             features[this.streetName+4].setStyle(style)
                         }else if(signals[i][j] === 5){
-                            this.canvasHolder[2].drawLeftDiagOfCircle(i)
+                            this.canvasHolder[2].drawCustomHalfOfCircle(1.1,2.1,i)
                             style = this.createStyle(2)
                             features[this.streetName+2].setStyle(style)
                         }else if(signals[i][j] === 6){
-                            this.canvasHolder[6].drawFullCircle(i)
-                            style = this.createStyle(6)
+                            // this.canvasHolder[6].drawFullCircle(i)
+                            style = this.createImageStyle(this.SignalColorImages[i],6)
                             features[this.streetName+6].setStyle(style)
                         }else if(signals[i][j] === 8){
                             this.canvasHolder[8].drawRightHalfOfCircle(i)
@@ -306,12 +312,12 @@ export default class SignalAreas{
                             style = this.createStyle(2)
                             features[this.streetName+2].setStyle(style)
                         }else if(signals[i][j] === 3){
-                            this.canvasHolder[8].drawLeftDiagOfCircle(i)
+                            this.canvasHolder[8].drawCustomHalfOfCircle(0.1,1.1,i)
                             style = this.createStyle(8)
                             features[this.streetName+8].setStyle(style)
                         }else if(signals[i][j] === 4){
-                            this.canvasHolder[4].drawFullCircle(i)
-                            style = this.createStyle(4)
+                            // this.canvasHolder[4].drawFullCircle(i)
+                            style = this.createImageStyle(this.SignalColorImages[i],4)
                             features[this.streetName+4].setStyle(style)
                         }else if(signals[i][j] === 5){
                             this.canvasHolder[2].drawLeftHalfOfCircle(i)
@@ -326,7 +332,7 @@ export default class SignalAreas{
                             style = this.createStyle(6)
                             features[this.streetName+6].setStyle(style)
                         }else if(signals[i][j] === 8){
-                            this.canvasHolder[8].drawLeftDiagOfCircle(i)
+                            this.canvasHolder[8].drawCustomHalfOfCircle(1.1,2.1,i)
                             style = this.createStyle(8)
                             features[this.streetName+8].setStyle(style)
                         }
