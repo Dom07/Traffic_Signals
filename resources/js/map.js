@@ -106,10 +106,10 @@ const halsey_raymond_rotation_angles = {
 }
 
 const broad_raymond_rotation_angles = {
-    2: 0, // incoming from right
-    3: 0, // incoming from left
-    4: 0,
-    5: 0
+    2: 0.1, // incoming from right
+    3: 1.12, // incoming from left
+    4: 1.6,   // incoming frop top
+    5: 0.6
 }
 
 const commerce_raymond_rotation_angles = {
