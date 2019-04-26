@@ -30,6 +30,7 @@ var dataPointObject = {
 
 var color=["green","orange","red"];
 var signal_phases = [];
+var lineThickness = 7;
 
 var streetName = {
         0: "0",
@@ -48,6 +49,7 @@ var chart = new CanvasJS.Chart("myChart", {
     axisX:{
         title: "Time",
         maximum : 100,
+        // minimum:0,
     },
     axisY:{
         title: "StreetNames",
@@ -57,27 +59,39 @@ var chart = new CanvasJS.Chart("myChart", {
         }
     },
     data: [              
-        {
+        {   
+            lineThickness: lineThickness,
+            markerType: "none",
             type: "line",
             dataPoints: dataPointObject.summit_warren.dps,
         },
-        {
+        {   
+            lineThickness: lineThickness,
+            markerType: "none",
             type: "line",
             dataPoints: dataPointObject.lock_warren.dps,
         },
-        {
+        {   
+            lineThickness: lineThickness,
+            markerType: "none",
             type: "line",
             dataPoints: dataPointObject.norfolk_warren.dps,
         },
-        {
+        {   
+            lineThickness: lineThickness,
+            markerType: "none",
             type: "line",
             dataPoints: dataPointObject.hudson_warren.dps,
         },
-        {
+        {   
+            lineThickness: lineThickness,
+            markerType: "none",
             type: "line",
             dataPoints: dataPointObject.west_market_warren.dps,
         },
-        {
+        {   
+            lineThickness: lineThickness,
+            markerType: "none",
             type: "line",
             dataPoints: dataPointObject.west_market_first.dps,
         }
@@ -113,12 +127,8 @@ var updateChart = function(){
     dataPointObject.xVal++;
     // if(dataPointObject.summit_warren.dps.length>5){
     //     dataPointObject.summit_warren.dps.shift();
-    //     dataPointObject.lock_warren.dps.shift();
-    //     dataPointObject.norfolk_warren.dps.shift();
-    //     // dataPointObject.hudson_warren.dps.shift();
-    //     // dataPointObject.west_market_warren.dps.shift();
-    //     // dataPointObject.west_market_first.dps.shift();
     // }
+    console.log(dataPointObject.summit_warren.dps.length)
     chart.render();
 }
 
