@@ -1,4 +1,4 @@
-var signal_phases = [];
+var signal_phases = new Array;
 var Summit_Signal_Phases;
 var Lock_warren_signal_phases;
 var norfolk_warren_signal_phases;
@@ -12,8 +12,22 @@ var broad_raymond;
 var commerce_raymond;
 var mullbery_raymond;
 var mccarter_raymond;
-var signal_color;
-var signal_number;
+var signal_color = 0;
+var phases = [];
+var url = ["http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Summit_Warren",
+            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Lock_Warren",
+            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Norfolk_Warren",
+            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=First_WestMarket",
+            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=WestMarket_Warren",
+            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Hudson_Warren",
+            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=University_Raymond",
+            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Washington_Raymond",
+            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Halsey_Raymond",
+            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Broad_Raymond",
+            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Commerce_Raymond",
+            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Mullberry_Raymond",
+            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=McCarter_Raymond"
+        ];
 
 function getJSON(url, callback) {
     var xhr = new XMLHttpRequest();
@@ -30,26 +44,8 @@ function getJSON(url, callback) {
     xhr.send();
 };
 
-export function fetchSignal(url, signal_number){
-    getJSON(url, function(err,data){
-        if(err===null){
-            var phases = [data[0].CurGreenPhase, data[0].CurYellowPhase, data[0].CurRedPhase];
-            for(var i = 0; i < phases.length; i++){
-                for(var j = 0; j < phases[i].length; j++){
-                    if(phases[i][j] === signal_number){
-                        signal_color = i;
-                        break;
-                    }
-                }
-            }
-        }
-    })
-    return signal_color;
-}
-
-export function fetchData(url){
-    signal_phases = [];   
-
+export function fetchData(){
+    signal_phases = [];
     getJSON(url[0],function(err,data){
         if(err===null){    
             Summit_Signal_Phases = [data[0].CurGreenPhase, data[0].CurYellowPhase, data[0].CurRedPhase];
@@ -127,8 +123,7 @@ export function fetchData(url){
             mccarter_raymond = [data[0].CurGreenPhase, data[0].CurYellowPhase, data[0].CurRedPhase];
         }
     })
-    
-    
+
     signal_phases.push(Summit_Signal_Phases);
     signal_phases.push(Lock_warren_signal_phases);
     signal_phases.push(norfolk_warren_signal_phases);
@@ -142,8 +137,6 @@ export function fetchData(url){
     signal_phases.push(commerce_raymond);
     signal_phases.push(mullbery_raymond);
     signal_phases.push(mccarter_raymond);
-    // signal_remaining_time.push(summit_remaining_time);
-    
     return signal_phases;
 }
 

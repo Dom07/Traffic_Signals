@@ -7,21 +7,6 @@ var signal_phases;
 var SIGNAL_COLORS = [];
 var features = {};
 
-var url = ["http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Summit_Warren",
-            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Lock_Warren",
-            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Norfolk_Warren",
-            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=First_WestMarket",
-            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=WestMarket_Warren",
-            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Hudson_Warren",
-            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=University_Raymond",
-            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Washington_Raymond",
-            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Halsey_Raymond",
-            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Broad_Raymond",
-            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Commerce_Raymond",
-            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Mullberry_Raymond",
-            "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=McCarter_Raymond"
-        ];
-
 // Available Signals
 const summit_warren_signals = [2,4,6];
 const lock_warren_signals = [2,4,6,8];
@@ -337,7 +322,7 @@ function addFeatureToVectorSource(signalAreaObj, features){
 
 function repeatingLoop(){
     signal_phases = []
-    signal_phases = fetchData(url);
+    signal_phases = fetchData();
     // summit_remaining_time = tempObj['signal_remaining_time'];
     // console.log(summit_re)
     LayDataOnMap();
