@@ -145,13 +145,3 @@ function getSignalIndex(signals, signal_number){
     }
     return index;
 }
-
-// { x: 10, y: 71 },
-// { x: 20, y: 55 },
-// { x: 30, y: 50 ,lineColor: "green", color: "green",},
-// { x: 40, y: 65 },
-// { x: 50, y: 68 },
-// { x: 60, y: 28 },
-// { x: 70, y: 34 },
-// { x: 80, y: 14 },
-// { x: 90, y: 23 }
