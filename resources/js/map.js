@@ -6,6 +6,7 @@ var vectorLayer;
 export var signal_phases;
 var SIGNAL_COLORS = [];
 var features = {};
+var line;
 
 // Available Signals
 const summit_warren_signals = [2,4,6];
@@ -202,36 +203,14 @@ const McCarter_Raymond = {
     8: ol.proj.fromLonLat([-74.165928, 40.735953])
 }
 
-const points1 = new Array(
+const warrenStreetPath = new Array(
     Summit_Warren[6],Lock_Warren[4],Norfolk_Warren[4],Hudson_Warren[2],WestMarket_Warren[5],First_Street_West_Market[3]
 );
 
-const points2 = new Array(
+const raymondStreetPath = new Array(
     University_Raymond[3], Washington_Raymond[2], Halsey_Raymond[2], Broad_Raymond[2], Commerce_Raymond[2], Mullberry_Raymond[2], McCarter_Raymond[4]
 );
 
-const line1 = new ol.Feature({
-    geometry: new ol.geom.LineString(points1),
-});
-
-const line2 = new ol.Feature({
-    geometry: new ol.geom.LineString(points2),
-});
-
-
-line1.setStyle(new ol.style.Style({
-    stroke: new ol.style.Stroke({
-        color:'#3399ff',
-        width: 10
-    })
-}))
-
-line2.setStyle(new ol.style.Style({
-    stroke: new ol.style.Stroke({
-        color:'#3399ff',
-        width: 10
-    })
-}))
 
 var summitWStreet = new SignalAreas("summit_warren", summit_warren_signals, Summit_Warren, summit_warren_rotation_angles)
 var lockWStreet = new SignalAreas("lock_warren", lock_warren_signals, Lock_Warren, lock_warren_rotation_angles)
@@ -294,8 +273,9 @@ function LayDataOnMap(){
     createNewFeatures(features);
     addColorToFeatures(features);
     addFeaturesToVectorSource(features);
-    vectorSource.addFeature(line1);
-    vectorSource.addFeature(line2);   
+    if(line!==undefined){
+        vectorSource.addFeature(line);
+    }
 }
 
 function createNewFeatures(features){
@@ -312,6 +292,7 @@ function createNewFeatures(features){
     commerceRaymond.createNewIconFeature(features);
     mullberryRaymond.createNewIconFeature(features);
     mccarterRaymond.createNewIconFeature(features);
+    createPath(2);
 }
 
 function addColorToFeatures(features){
@@ -351,6 +332,27 @@ function addFeatureToVectorSource(signalAreaObj, features){
         vectorSource.addFeature(features[signalAreaObj.streetName+signalAreaObj.signalPositions[i]]);
     }
     return features;
+}
+
+export function createPath(pathValue){
+    var style = new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color:'#3399ff',
+            width: 10
+        })
+    })
+    
+    if(pathValue == 1){
+        line = new ol.Feature({
+            geometry: new ol.geom.LineString(warrenStreetPath),
+        });    
+    }else if(pathValue == 2){
+        line = new ol.Feature({
+        geometry: new ol.geom.LineString(raymondStreetPath),
+        });
+    }
+    
+    line.setStyle(style);
 }
 
 function repeatingLoop(){
