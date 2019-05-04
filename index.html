@@ -4,39 +4,24 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>TrafficLightsMap</title>
-    <style>
-        #map {
-            width: 100%;
-            height:65vh;
-        }
-
-        #myChart{
-            width:  100%;
-            height: 35vh;
-        }
-
-        #controller{
-            width:100%;
-            height: 5vh;
-            border: solid 1px red;
-        }
-    </style>    
+    <link rel="stylesheet" type="text/css" href="resources/css/theme.css">  
 </head>
 <body>
-    <div id='map'></div>
-    <div id='controller'>
-        <input type="radio" name="path" value="warren" id="warren">
-        <label for="warren">Warren Street</label>
-        <input type="radio" name="path" value="raymond" id="raymond">
-        <label for="raymond">Raymond Street</label>
-        <input type="radio" name="path" value="none" id="none">
-        <label for="none">None</label>
-    </div>
-    <div id='myChart' style="width: 100%; height: 350px">
+    <div id="main">
+        <div id='map'>
+            <div id='controller'>
+                <input type="radio" name="path" value="warren" id="warren">
+                <label for="warren">Warren Street</label>
+                <input type="radio" name="path" value="raymond" id="raymond">
+                <label for="raymond">Raymond Street</label>
+                <input type="radio" name="path" value="none" id="none">
+                <label for="none">None</label>
+            </div>
+        </div>
+        <div id='myChart'></div>
     </div>
     <script src='https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js'></script>
     <script type="text/javascript" src="resources/js/canvasjs.min.js" ></script>
-    <!-- <script type='module' src='js/SignalAreas.js'></script> -->
     <script type='module' src='resources/js/map.js'></script>
     <script type='module' src='resources/js/RaymondStreetChart.js'></script>
 </body>

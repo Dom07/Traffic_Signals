@@ -34,6 +34,7 @@ var dataPointObject = {
 
 var color=["green","orange","red"];
 var lineThickness = 5;
+var markerType = "none";
 
 var streetName = {
         0: "0",
@@ -70,43 +71,43 @@ var chart = new CanvasJS.Chart("myChart", {
     data: [              
         {   
             lineThickness: lineThickness,
-            // markerType: "none",
+            markerType: markerType,
             type: "line",
             dataPoints: dataPointObject.university_raymond.dps,
         },
         {   
             lineThickness: lineThickness,
-            // markerType: "none",
+            markerType: markerType,
             type: "line",
             dataPoints: dataPointObject.washington_raymond.dps,
         },
         {   
             lineThickness: lineThickness,
-            // markerType: "none",
+            markerType: markerType,
             type: "line",
             dataPoints: dataPointObject.halsey_raymond.dps,
         },
         {   
             lineThickness: lineThickness,
-            // markerType: "none",
+            markerType: markerType,
             type: "line",
             dataPoints: dataPointObject.broad_raymond.dps,
         },
         {   
             lineThickness: lineThickness,
-            // markerType: "none",
+            markerType: markerType,
             type: "line",
             dataPoints: dataPointObject.commerce_raymond.dps,
         },
         {   
             lineThickness: lineThickness,
-            // markerType: "none",
+            markerType: markerType,
             type: "line",
             dataPoints: dataPointObject.mulberry_raymond.dps,
         },
         {   
             lineThickness: lineThickness,
-            // markerType: "none",
+            markerType: markerType,
             type: "line",
             dataPoints: dataPointObject.mccarter_raymond.dps,
         }
@@ -118,32 +119,32 @@ var updateChart = function(){
     var adjuster;
 
     var x = getSignalIndex(signal_phases[6],2);
-    adjuster = yAdjuster(x);
-    dataPointObject.university_raymond.dps.push({x : dataPointObject.xVal, y : dataPointObject.university_raymond.yVal+adjuster, lineColor: color[x], color: color[x]});
+    // adjuster = yAdjuster(x);
+    dataPointObject.university_raymond.dps.push({x : dataPointObject.xVal, y : dataPointObject.university_raymond.yVal, lineColor: color[x], color: color[x]});
     
     x = getSignalIndex(signal_phases[7],2);
-    adjuster = yAdjuster(x);
-    dataPointObject.washington_raymond.dps.push({x:dataPointObject.xVal, y: dataPointObject.washington_raymond.yVal+adjuster,  lineColor: color[x], color: color[x]});
+    // adjuster = yAdjuster(x);
+    dataPointObject.washington_raymond.dps.push({x:dataPointObject.xVal, y: dataPointObject.washington_raymond.yVal,  lineColor: color[x], color: color[x]});
     
     x = getSignalIndex(signal_phases[8],2);
-    adjuster = yAdjuster(x);
-    dataPointObject.halsey_raymond.dps.push({x:dataPointObject.xVal, y:dataPointObject.halsey_raymond.yVal+adjuster, lineColor: color[x], color: color[x]});
+    // adjuster = yAdjuster(x);
+    dataPointObject.halsey_raymond.dps.push({x:dataPointObject.xVal, y:dataPointObject.halsey_raymond.yVal, lineColor: color[x], color: color[x]});
 
     x = getSignalIndex(signal_phases[9],2);
-    adjuster = yAdjuster(x);
-    dataPointObject.broad_raymond.dps.push({x:dataPointObject.xVal,y:dataPointObject.broad_raymond.yVal+adjuster, lineColor:color[x], color:color[x]});
+    // adjuster = yAdjuster(x);
+    dataPointObject.broad_raymond.dps.push({x:dataPointObject.xVal,y:dataPointObject.broad_raymond.yVal, lineColor:color[x], color:color[x]});
     
     x = getSignalIndex(signal_phases[10],2);
-    adjuster = yAdjuster(x);
-    dataPointObject.commerce_raymond.dps.push({x:dataPointObject.xVal, y: dataPointObject.commerce_raymond.yVal+adjuster, lineColor: color[x], color:color[x]});
+    // adjuster = yAdjuster(x);
+    dataPointObject.commerce_raymond.dps.push({x:dataPointObject.xVal, y: dataPointObject.commerce_raymond.yVal, lineColor: color[x], color:color[x]});
 
     x = getSignalIndex(signal_phases[11],6);
-    adjuster = yAdjuster(x);
-    dataPointObject.mulberry_raymond.dps.push({x:dataPointObject.xVal, y: dataPointObject.mulberry_raymond.yVal+adjuster, lineColor: color[x], color:color[x]});
+    // adjuster = yAdjuster(x);
+    dataPointObject.mulberry_raymond.dps.push({x:dataPointObject.xVal, y: dataPointObject.mulberry_raymond.yVal, lineColor: color[x], color:color[x]});
 
     x = getSignalIndex(signal_phases[12],8);
-    adjuster = yAdjuster(x);
-    dataPointObject.mccarter_raymond.dps.push({x:dataPointObject.xVal, y: dataPointObject.mccarter_raymond.yVal+adjuster, lineColor: color[x], color:color[x]});
+    // adjuster = yAdjuster(x);
+    dataPointObject.mccarter_raymond.dps.push({x:dataPointObject.xVal, y: dataPointObject.mccarter_raymond.yVal, lineColor: color[x], color:color[x]});
 
     
     dataPointObject.xVal++;
