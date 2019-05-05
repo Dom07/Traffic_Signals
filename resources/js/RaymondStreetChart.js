@@ -1,5 +1,9 @@
 import {signal_phases} from "./map.js";
 
+var chart;
+var run;
+var loop;
+
 var dataPointObject = {
     xVal:0,
     university_raymond:{
@@ -37,85 +41,103 @@ var lineThickness = 5;
 var markerType = "none";
 
 var streetName = {
-        0: "0",
-        10:"University Raymond",
-        20:"Washington Raymond",
-        30:"Halsey Raymond",
-        40:"Broad Raymond",
-        50:"Commerce Raymond",
-        60:"Mulberry Raymond",
-        70:"Mccarter Raymond",
-        80:""};
+    0: "0",
+    10:"University Raymond",
+    20:"Washington Raymond",
+    30:"Halsey Raymond",
+    40:"Broad Raymond",
+    50:"Commerce Raymond",
+    60:"Mulberry Raymond",
+    70:"Mccarter Raymond",
+    80:""
+};
 
-var chart = new CanvasJS.Chart("myChart", {
-    title:{
-        text: "Time Series"              
-    },
-    axisX:{
-        title: "Time",
-        interval:1,
-        // maximum : 5,
-        // minimum:0,
-        // viewPortMinimum:0,
-    },
-    axisY:{
-        title: "StreetNames",
-        interval: 10,
-        gridThickness : 0.1,
-        labelFormatter: function(e){
-            return streetName[e.value]
+export function createChartRaymond(){
+    run = true;
+    chart = new CanvasJS.Chart("myChart", {
+        title:{
+            text: "Time Series"              
         },
-        maximum:80
-    },
-    dataPointMaxWidth:0,
-    data: [              
-        {   
-            lineThickness: lineThickness,
-            markerType: markerType,
-            type: "line",
-            dataPoints: dataPointObject.university_raymond.dps,
+        axisX:{
+            title: "Time",
+            interval:1,
+            // maximum : 5,
+            // minimum:0,
+            // viewPortMinimum:0,
         },
-        {   
-            lineThickness: lineThickness,
-            markerType: markerType,
-            type: "line",
-            dataPoints: dataPointObject.washington_raymond.dps,
+        axisY:{
+            title: "StreetNames",
+            interval: 10,
+            gridThickness : 0.1,
+            labelFormatter: function(e){
+                return streetName[e.value]
+            },
+            maximum:80
         },
-        {   
-            lineThickness: lineThickness,
-            markerType: markerType,
-            type: "line",
-            dataPoints: dataPointObject.halsey_raymond.dps,
-        },
-        {   
-            lineThickness: lineThickness,
-            markerType: markerType,
-            type: "line",
-            dataPoints: dataPointObject.broad_raymond.dps,
-        },
-        {   
-            lineThickness: lineThickness,
-            markerType: markerType,
-            type: "line",
-            dataPoints: dataPointObject.commerce_raymond.dps,
-        },
-        {   
-            lineThickness: lineThickness,
-            markerType: markerType,
-            type: "line",
-            dataPoints: dataPointObject.mulberry_raymond.dps,
-        },
-        {   
-            lineThickness: lineThickness,
-            markerType: markerType,
-            type: "line",
-            dataPoints: dataPointObject.mccarter_raymond.dps,
-        }
-    ]
-});
-chart.render();
+        dataPointMaxWidth:0,
+        data: [              
+            {   
+                lineThickness: lineThickness,
+                markerType: markerType,
+                type: "line",
+                dataPoints: dataPointObject.university_raymond.dps,
+            },
+            {   
+                lineThickness: lineThickness,
+                markerType: markerType,
+                type: "line",
+                dataPoints: dataPointObject.washington_raymond.dps,
+            },
+            {   
+                lineThickness: lineThickness,
+                markerType: markerType,
+                type: "line",
+                dataPoints: dataPointObject.halsey_raymond.dps,
+            },
+            {   
+                lineThickness: lineThickness,
+                markerType: markerType,
+                type: "line",
+                dataPoints: dataPointObject.broad_raymond.dps,
+            },
+            {   
+                lineThickness: lineThickness,
+                markerType: markerType,
+                type: "line",
+                dataPoints: dataPointObject.commerce_raymond.dps,
+            },
+            {   
+                lineThickness: lineThickness,
+                markerType: markerType,
+                type: "line",
+                dataPoints: dataPointObject.mulberry_raymond.dps,
+            },
+            {   
+                lineThickness: lineThickness,
+                markerType: markerType,
+                type: "line",
+                dataPoints: dataPointObject.mccarter_raymond.dps,
+            }
+        ]
+    });
+    chart.render();
+    startLoop();
+}
 
-var updateChart = function(){
+function startLoop(){
+    updateChart();
+    if(run==true){
+        loop = setTimeout(startLoop, 1000);
+    }
+}
+
+export function breakRaymond(){
+    run = false;
+    chart.destroy();
+    chart = null;
+}
+
+function updateChart(){
     var adjuster;
 
     var x = getSignalIndex(signal_phases[6],2);
@@ -159,8 +181,6 @@ var updateChart = function(){
     }
     chart.render();
 }
-
-setInterval(function(){updateChart()},1000);
 
 function getSignalIndex(signals, signal_number){
     var index;

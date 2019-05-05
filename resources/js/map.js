@@ -1,5 +1,6 @@
 import {fetchData} from './fetchData.js';
 import SignalAreas from './SignalAreas.js';
+import {createChartRaymond, breakRaymond} from './RaymondStreetChart.js';
 
 var vectorSource;
 var vectorLayer;
@@ -267,6 +268,8 @@ function initMap(){
     return map;
 }
 
+
+
 function LayDataOnMap(){
     vectorSource.clear();
     features = {};
@@ -292,7 +295,6 @@ function createNewFeatures(features){
     commerceRaymond.createNewIconFeature(features);
     mullberryRaymond.createNewIconFeature(features);
     mccarterRaymond.createNewIconFeature(features);
-    createPath(2);
 }
 
 function addColorToFeatures(features){
@@ -334,7 +336,22 @@ function addFeatureToVectorSource(signalAreaObj, features){
     return features;
 }
 
-export function createPath(pathValue){
+function addEventToRadioButtons(){
+    var radio = document.getElementById('warren');
+    radio.onclick = function(){
+        createPath(0)
+    }
+    radio = document.getElementById('raymond');
+    radio.onclick = function(){
+        createPath(1)
+    }
+    radio = document.getElementById('none');
+    radio.onclick = function(){
+        createPath(2)
+    }
+}
+
+function createPath(pathValue){
     var style = new ol.style.Style({
         stroke: new ol.style.Stroke({
             color:'#3399ff',
@@ -342,17 +359,20 @@ export function createPath(pathValue){
         })
     })
     
-    if(pathValue == 1){
+    if(pathValue == 0){
         line = new ol.Feature({
             geometry: new ol.geom.LineString(warrenStreetPath),
         });    
-    }else if(pathValue == 2){
+    }else if(pathValue == 1){
         line = new ol.Feature({
         geometry: new ol.geom.LineString(raymondStreetPath),
         });
+    }else if(pathValue == 2){
+        line = undefined;
     }
-    
-    line.setStyle(style);
+    if(line!== undefined){
+        line.setStyle(style);
+    }
 }
 
 function repeatingLoop(){
@@ -364,9 +384,9 @@ function repeatingLoop(){
     setTimeout(repeatingLoop,1000);
 }
 
-
 function main(){
     initMap();
+    addEventToRadioButtons();
     repeatingLoop();
 }
 

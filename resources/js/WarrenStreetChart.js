@@ -32,75 +32,78 @@ var color=["green","orange","red"];
 var lineThickness = 5;
 
 var streetName = {
-        0: "0",
-        10:"Summit_Warren",
-        20:"Lock_Warren",
-        30:"Norfolk_Warren",
-        40:"Hudson_Warren",
-        50:"West_Market_Warren",
-        60:"West_Market_First_Street",
-        70:"x"};
+    0: "0",
+    10:"Summit_Warren",
+    20:"Lock_Warren",
+    30:"Norfolk_Warren",
+    40:"Hudson_Warren",
+    50:"West_Market_Warren",
+    60:"West_Market_First_Street",
+    70:"x"
+};
 
-var chart = new CanvasJS.Chart("myChart", {
-    title:{
-        text: "Time Series"              
-    },
-    axisX:{
-        title: "Time",
-        interval:1,
-        // maximum : 5,
-        // minimum:0,
-        // viewPortMinimum:0,
-    },
-    axisY:{
-        title: "StreetNames",
-        interval: 10,
-        gridThickness : 0.1,
-        labelFormatter: function(e){
-            return streetName[e.value]
-        }
-    },
-    dataPointMaxWidth:0,
-    data: [              
-        {   
-            lineThickness: lineThickness,
-            // markerType: "none",
-            type: "line",
-            dataPoints: dataPointObject.summit_warren.dps,
+function createChartWarren(){
+    var chart = new CanvasJS.Chart("myChart", {
+        title:{
+            text: "Time Series"              
         },
-        {   
-            lineThickness: lineThickness,
-            // markerType: "none",
-            type: "line",
-            dataPoints: dataPointObject.lock_warren.dps,
+        axisX:{
+            title: "Time",
+            interval:1,
+            // maximum : 5,
+            // minimum:0,
+            // viewPortMinimum:0,
         },
-        {   
-            lineThickness: lineThickness,
-            // markerType: "none",
-            type: "line",
-            dataPoints: dataPointObject.norfolk_warren.dps,
+        axisY:{
+            title: "StreetNames",
+            interval: 10,
+            gridThickness : 0.1,
+            labelFormatter: function(e){
+                return streetName[e.value]
+            }
         },
-        {   
-            lineThickness: lineThickness,
-            // markerType: "none",
-            type: "line",
-            dataPoints: dataPointObject.hudson_warren.dps,
-        },
-        {   
-            lineThickness: lineThickness,
-            // markerType: "none",
-            type: "line",
-            dataPoints: dataPointObject.west_market_warren.dps,
-        },
-        {   
-            lineThickness: lineThickness,
-            // markerType: "none",
-            type: "line",
-            dataPoints: dataPointObject.west_market_first.dps,
-        }
-    ]
-});
-chart.render();
+        dataPointMaxWidth:0,
+        data: [              
+            {   
+                lineThickness: lineThickness,
+                // markerType: "none",
+                type: "line",
+                dataPoints: dataPointObject.summit_warren.dps,
+            },
+            {   
+                lineThickness: lineThickness,
+                // markerType: "none",
+                type: "line",
+                dataPoints: dataPointObject.lock_warren.dps,
+            },
+            {   
+                lineThickness: lineThickness,
+                // markerType: "none",
+                type: "line",
+                dataPoints: dataPointObject.norfolk_warren.dps,
+            },
+            {   
+                lineThickness: lineThickness,
+                // markerType: "none",
+                type: "line",
+                dataPoints: dataPointObject.hudson_warren.dps,
+            },
+            {   
+                lineThickness: lineThickness,
+                // markerType: "none",
+                type: "line",
+                dataPoints: dataPointObject.west_market_warren.dps,
+            },
+            {   
+                lineThickness: lineThickness,
+                // markerType: "none",
+                type: "line",
+                dataPoints: dataPointObject.west_market_first.dps,
+            }
+        ]
+    });
+    chart.render();
+}
 
 var updateChart = function(){
     var adjuster;
