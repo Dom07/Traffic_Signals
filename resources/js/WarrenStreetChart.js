@@ -1,5 +1,9 @@
 import {signal_phases} from "./map.js";
 
+var chart = null;
+var run;
+var loop;
+
 var dataPointObject = {
     xVal:0,
     summit_warren:{
@@ -30,6 +34,7 @@ var dataPointObject = {
 
 var color=["green","orange","red"];
 var lineThickness = 5;
+var markerType = "none";
 
 var streetName = {
     0: "0",
@@ -42,94 +47,121 @@ var streetName = {
     70:"x"
 };
 
-function createChartWarren(){
-    var chart = new CanvasJS.Chart("myChart", {
-        title:{
-            text: "Time Series"              
-        },
-        axisX:{
-            title: "Time",
-            interval:1,
-            // maximum : 5,
-            // minimum:0,
-            // viewPortMinimum:0,
-        },
-        axisY:{
-            title: "StreetNames",
-            interval: 10,
-            gridThickness : 0.1,
-            labelFormatter: function(e){
-                return streetName[e.value]
-            }
-        },
-        dataPointMaxWidth:0,
-        data: [              
-            {   
-                lineThickness: lineThickness,
-                // markerType: "none",
-                type: "line",
-                dataPoints: dataPointObject.summit_warren.dps,
+export function createChartWarren(){
+    run = true;
+    console.log(chart);
+    if(chart == null){
+        chart = new CanvasJS.Chart("myChart", {
+            title:{
+                text: "Time Series"              
             },
-            {   
-                lineThickness: lineThickness,
-                // markerType: "none",
-                type: "line",
-                dataPoints: dataPointObject.lock_warren.dps,
+            axisX:{
+                title: "Time",
+                interval:1,
+                // maximum : 5,
+                // minimum:0,
+                // viewPortMinimum:0,
             },
-            {   
-                lineThickness: lineThickness,
-                // markerType: "none",
-                type: "line",
-                dataPoints: dataPointObject.norfolk_warren.dps,
+            axisY:{
+                title: "StreetNames",
+                interval: 10,
+                gridThickness : 0.1,
+                labelFormatter: function(e){
+                    return streetName[e.value]
+                }
             },
-            {   
-                lineThickness: lineThickness,
-                // markerType: "none",
-                type: "line",
-                dataPoints: dataPointObject.hudson_warren.dps,
-            },
-            {   
-                lineThickness: lineThickness,
-                // markerType: "none",
-                type: "line",
-                dataPoints: dataPointObject.west_market_warren.dps,
-            },
-            {   
-                lineThickness: lineThickness,
-                // markerType: "none",
-                type: "line",
-                dataPoints: dataPointObject.west_market_first.dps,
-            }
-        ]
-    });
-    chart.render();
+            dataPointMaxWidth:0,
+            data: [              
+                {   
+                    lineThickness: lineThickness,
+                    markerType: markerType,
+                    type: "line",
+                    dataPoints: dataPointObject.summit_warren.dps,
+                },
+                {   
+                    lineThickness: lineThickness,
+                    markerType: markerType,
+                    type: "line",
+                    dataPoints: dataPointObject.lock_warren.dps,
+                },
+                {   
+                    lineThickness: lineThickness,
+                    markerType: markerType,
+                    type: "line",
+                    dataPoints: dataPointObject.norfolk_warren.dps,
+                },
+                {   
+                    lineThickness: lineThickness,
+                    markerType: markerType,
+                    type: "line",
+                    dataPoints: dataPointObject.hudson_warren.dps,
+                },
+                {   
+                    lineThickness: lineThickness,
+                    markerType: markerType,
+                    type: "line",
+                    dataPoints: dataPointObject.west_market_warren.dps,
+                },
+                {   
+                    lineThickness: lineThickness,
+                    markerType: markerType,
+                    type: "line",
+                    dataPoints: dataPointObject.west_market_first.dps,
+                }
+            ]
+        });
+        chart.render();
+        startLoop();
+    }
 }
 
-var updateChart = function(){
-    var adjuster;
+function startLoop(){
+    updateChart();
+    if(run==true){
+        loop = setTimeout(startLoop, 1000);
+    }else{
+        clearInterval(loop);
+        dataPointObject.summit_warren.dps = []
+        dataPointObject.lock_warren.dps = []
+        dataPointObject.norfolk_warren.dps = []
+        dataPointObject.hudson_warren.dps = []
+        dataPointObject.west_market_warren.dps = []
+        dataPointObject.west_market_first.dps = []
+        chart.destroy();
+        chart = null;
+        dataPointObject.xVal = 0;
+    }
+}
+
+export function breakWarren(){
+    run = false;
+}
+
+function updateChart(){
+    // var adjuster;
     var x = getSignalIndex(signal_phases[0],6);
-    adjuster = yAdjuster(x);
-    dataPointObject.summit_warren.dps.push({x : dataPointObject.xVal, y : dataPointObject.summit_warren.yVal+adjuster, lineColor: color[x], color: color[x]});
+    // adjuster = yAdjuster(x);
+    dataPointObject.summit_warren.dps.push({x : dataPointObject.xVal, y : dataPointObject.summit_warren.yVal, lineColor: color[x], color: color[x]});
     
     x = getSignalIndex(signal_phases[1],4);
-    adjuster = yAdjuster(x);
-    dataPointObject.lock_warren.dps.push({x:dataPointObject.xVal, y: dataPointObject.lock_warren.yVal+adjuster,  lineColor: color[x], color: color[x]});
+    // adjuster = yAdjuster(x);
+    dataPointObject.lock_warren.dps.push({x:dataPointObject.xVal, y: dataPointObject.lock_warren.yVal,  lineColor: color[x], color: color[x]});
     
     x = getSignalIndex(signal_phases[2],4);
-    adjuster = yAdjuster(x);
-    dataPointObject.norfolk_warren.dps.push({x:dataPointObject.xVal, y:dataPointObject.norfolk_warren.yVal+adjuster, lineColor: color[x], color: color[x]});
+    // adjuster = yAdjuster(x);
+    dataPointObject.norfolk_warren.dps.push({x:dataPointObject.xVal, y:dataPointObject.norfolk_warren.yVal, lineColor: color[x], color: color[x]});
 
     x = getSignalIndex(signal_phases[3],4);
-    adjuster = yAdjuster(x);
-    dataPointObject.hudson_warren.dps.push({x:dataPointObject.xVal,y:dataPointObject.hudson_warren.yVal+adjuster, lineColor:color[x], color:color[x]});
+    // adjuster = yAdjuster(x);
+    dataPointObject.hudson_warren.dps.push({x:dataPointObject.xVal,y:dataPointObject.hudson_warren.yVal, lineColor:color[x], color:color[x]});
     
     x = getSignalIndex(signal_phases[4],4);
-    adjuster = yAdjuster(x);
-    dataPointObject.west_market_warren.dps.push({x:dataPointObject.xVal, y: dataPointObject.west_market_warren.yVal+adjuster, lineColor: color[x], color:color[x]});
+    // adjuster = yAdjuster(x);
+    dataPointObject.west_market_warren.dps.push({x:dataPointObject.xVal, y: dataPointObject.west_market_warren.yVal, lineColor: color[x], color:color[x]});
 
     x = getSignalIndex(signal_phases[5],4);
-    adjuster = yAdjuster(x);
-    dataPointObject.west_market_first.dps.push({x:dataPointObject.xVal, y: dataPointObject.west_market_first.yVal+adjuster, lineColor: color[x], color:color[x]});
+    // adjuster = yAdjuster(x);
+    dataPointObject.west_market_first.dps.push({x:dataPointObject.xVal, y: dataPointObject.west_market_first.yVal, lineColor: color[x], color:color[x]});
     
     dataPointObject.xVal++;
     if(dataPointObject.summit_warren.dps.length > 30){
@@ -142,8 +174,6 @@ var updateChart = function(){
     }
     chart.render();
 }
-
-setInterval(function(){updateChart()},1000);
 
 function getSignalIndex(signals, signal_number){
     var index;

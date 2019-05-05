@@ -1,6 +1,7 @@
 import {fetchData} from './fetchData.js';
 import SignalAreas from './SignalAreas.js';
 import {createChartRaymond, breakRaymond} from './RaymondStreetChart.js';
+import {createChartWarren, breakWarren} from './WarrenStreetChart.js';
 
 var vectorSource;
 var vectorLayer;
@@ -212,7 +213,6 @@ const raymondStreetPath = new Array(
     University_Raymond[3], Washington_Raymond[2], Halsey_Raymond[2], Broad_Raymond[2], Commerce_Raymond[2], Mullberry_Raymond[2], McCarter_Raymond[4]
 );
 
-
 var summitWStreet = new SignalAreas("summit_warren", summit_warren_signals, Summit_Warren, summit_warren_rotation_angles)
 var lockWStreet = new SignalAreas("lock_warren", lock_warren_signals, Lock_Warren, lock_warren_rotation_angles)
 var norfolWStreet = new SignalAreas( "norfolk_warren", norfolk_warren_signals, Norfolk_Warren, norfolk_warren_rotation_angles)
@@ -267,8 +267,6 @@ function initMap(){
     });
     return map;
 }
-
-
 
 function LayDataOnMap(){
     vectorSource.clear();
@@ -362,13 +360,19 @@ function createPath(pathValue){
     if(pathValue == 0){
         line = new ol.Feature({
             geometry: new ol.geom.LineString(warrenStreetPath),
-        });    
+        });
+        createChartWarren();
+        // breakRaymond();    
     }else if(pathValue == 1){
         line = new ol.Feature({
         geometry: new ol.geom.LineString(raymondStreetPath),
         });
+        // breakWarren();
+        createChartRaymond();
     }else if(pathValue == 2){
         line = undefined;
+        breakRaymond();
+        breakWarren();
     }
     if(line!== undefined){
         line.setStyle(style);
