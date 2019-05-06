@@ -5,28 +5,34 @@ var run;
 var loop;
 
 var dataPointObject = {
-    xVal:0,
+    
     summit_warren:{
+        xVal:0,
         yVal:10,
         dps:[]
     },
     lock_warren:{
+        xVal:0,
         yVal:20,
         dps:[]
     },
     norfolk_warren:{
+        xVal:0,
         yVal:30,
         dps:[]
     },
     hudson_warren:{
+        xVal:0,
         yVal:40,
         dps:[]
     },
     west_market_warren:{
+        xVal:0,
         yVal:50,
         dps:[]
     },
     west_market_first:{
+        xVal:0,
         yVal:60,
         dps:[]
     }
@@ -120,15 +126,12 @@ function startLoop(){
         loop = setTimeout(startLoop, 1000);
     }else{
         clearInterval(loop);
-        dataPointObject.summit_warren.dps = []
-        dataPointObject.lock_warren.dps = []
-        dataPointObject.norfolk_warren.dps = []
-        dataPointObject.hudson_warren.dps = []
-        dataPointObject.west_market_warren.dps = []
-        dataPointObject.west_market_first.dps = []
+        for(var x in dataPointObject){
+            dataPointObject[x].dps = [];
+            dataPointObject[x].xVal = 0;
+        }
         chart.destroy();
         chart = null;
-        dataPointObject.xVal = 0;
     }
 }
 
@@ -137,39 +140,32 @@ export function breakWarren(){
 }
 
 function updateChart(){
-    // var adjuster;
     var x = getSignalIndex(signal_phases[0],6);
-    // adjuster = yAdjuster(x);
-    dataPointObject.summit_warren.dps.push({x : dataPointObject.xVal, y : dataPointObject.summit_warren.yVal, lineColor: color[x], color: color[x]});
+    dataPointObject.summit_warren.dps.push({x : dataPointObject.summit_warren.xVal, y : dataPointObject.summit_warren.yVal, lineColor: color[x], color: color[x]});
     
     x = getSignalIndex(signal_phases[1],4);
-    // adjuster = yAdjuster(x);
-    dataPointObject.lock_warren.dps.push({x:dataPointObject.xVal, y: dataPointObject.lock_warren.yVal,  lineColor: color[x], color: color[x]});
+    dataPointObject.lock_warren.dps.push({x:dataPointObject.lock_warren.xVal, y: dataPointObject.lock_warren.yVal,  lineColor: color[x], color: color[x]});
     
     x = getSignalIndex(signal_phases[2],4);
-    // adjuster = yAdjuster(x);
-    dataPointObject.norfolk_warren.dps.push({x:dataPointObject.xVal, y:dataPointObject.norfolk_warren.yVal, lineColor: color[x], color: color[x]});
+    dataPointObject.norfolk_warren.dps.push({x:dataPointObject.norfolk_warren.xVal, y:dataPointObject.norfolk_warren.yVal, lineColor: color[x], color: color[x]});
 
     x = getSignalIndex(signal_phases[3],2);
-    // adjuster = yAdjuster(x);
-    dataPointObject.hudson_warren.dps.push({x:dataPointObject.xVal,y:dataPointObject.hudson_warren.yVal, lineColor:color[x], color:color[x]});
+    dataPointObject.hudson_warren.dps.push({x:dataPointObject.hudson_warren.xVal,y:dataPointObject.hudson_warren.yVal, lineColor:color[x], color:color[x]});
     
     x = getSignalIndex(signal_phases[4],2);
-    // adjuster = yAdjuster(x);
-    dataPointObject.west_market_warren.dps.push({x:dataPointObject.xVal, y: dataPointObject.west_market_warren.yVal, lineColor: color[x], color:color[x]});
+    dataPointObject.west_market_warren.dps.push({x:dataPointObject.west_market_warren.xVal, y: dataPointObject.west_market_warren.yVal, lineColor: color[x], color:color[x]});
 
     x = getSignalIndex(signal_phases[5],4);
-    // adjuster = yAdjuster(x);
-    dataPointObject.west_market_first.dps.push({x:dataPointObject.xVal, y: dataPointObject.west_market_first.yVal, lineColor: color[x], color:color[x]});
+    dataPointObject.west_market_first.dps.push({x:dataPointObject.west_market_first.xVal, y: dataPointObject.west_market_first.yVal, lineColor: color[x], color:color[x]});
     
-    dataPointObject.xVal++;
+    for(var x in dataPointObject){
+        dataPointObject[x].xVal++;
+    }
+    
     if(dataPointObject.summit_warren.dps.length > 30){
-        dataPointObject.summit_warren.dps.shift();
-        dataPointObject.lock_warren.dps.shift();
-        dataPointObject.norfolk_warren.dps.shift();
-        dataPointObject.hudson_warren.dps.shift();
-        dataPointObject.west_market_warren.dps.shift();
-        dataPointObject.west_market_first.dps.shift();
+        for(var x in dataPointObject){
+            dataPointObject[x].dps.shift();
+        }
     }
     chart.render();
 }
@@ -186,16 +182,4 @@ function getSignalIndex(signals, signal_number){
         }
     }
     return index;
-}
-
-function yAdjuster(x){
-    var y;
-    if(x==0){
-        y = 3
-    }else if(x==2){
-        y = -3
-    }else{
-        y = 0
-    }
-    return y;
 }

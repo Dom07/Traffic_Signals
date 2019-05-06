@@ -12,8 +12,7 @@ var broad_raymond;
 var commerce_raymond;
 var mullbery_raymond;
 var mccarter_raymond;
-var signal_color = 0;
-var phases = [];
+
 var url = ["http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Summit_Warren",
             "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Lock_Warren",
             "http://transprod04.njit.edu/SignalIntersection/api/values/Get?FileName=Norfolk_Warren",

@@ -6,11 +6,10 @@ import {createChartWarren, breakWarren} from './WarrenStreetChart.js';
 var vectorSource;
 var vectorLayer;
 export var signal_phases;
-var SIGNAL_COLORS = [];
 var features = {};
 var line;
 
-// Available Signals
+// Street-Signal mapping
 const summit_warren_signals = [2,4,6];
 const lock_warren_signals = [2,4,6,8];
 const norfolk_warren_signals = [2,4,6,8];
@@ -35,7 +34,7 @@ vectorLayer = new ol.layer.Vector({
     source: vectorSource
 });
 
-// Rotation radians
+// Rotation radians for loading arrow images
 const summit_warren_rotation_angles = {
     2:  1.12,
     4:  0.6,
@@ -64,40 +63,40 @@ const first_street_west_market_rotation_angles = {
 }
 
 const west_market_warren_rotation_angles = {
-    2: 0.7, // incoming from top
-    3: 0.1, // incoming from right
-    4: 0.2, // incoming from bottom
+    2: 0.7, 
+    3: 0.1, 
+    4: 0.2, 
     // 5: 1.2
 }
 
 const hudson_warren_rotation_angles = {
-    2: 0.12, // incoming from right
-    3: 1.12, // incming from left
-    4: 0.6 // incoming from bottom
+    2: 0.12, 
+    3: 1.12,
+    4: 0.6 
 }
 
 const university_raymond_rotation_angles = {
-    2: 0.1, // incoming from right
-    3: 1.12, // incoming from left
-    4: 1.6 // incoming from top
+    2: 0.1, 
+    3: 1.12, 
+    4: 1.6 
 }
 
 const washington_raymond_rotation_angles = {
-    2: 0.1, // incoming from right
-    3: 1.12, // incoming from left 
-    4: 0.6  // incoming from bottom
+    2: 0.1, 
+    3: 1.12,  
+    4: 0.6  
 }
 
 const halsey_raymond_rotation_angles = {
-    2: 0.1, // incoming from right
-    3: 1.12, // incoming from left
-    4: 1.6  // incoming from top
+    2: 0.1, 
+    3: 1.12, 
+    4: 1.6  
 }
 
 const broad_raymond_rotation_angles = {
-    2: 0.1, // incoming from right
-    3: 1.12, // incoming from left
-    4: 1.6,   // incoming frop top
+    2: 0.1, 
+    3: 1.12, 
+    4: 1.6,  
     5: 0.6
 }
 
@@ -121,84 +120,84 @@ const mccarter_raymond_rotation_angles = {
 }
 
 // Street signal lon lats
-const Summit_Warren = {
+const Summit_Warren_Coordinates = {
     2:ol.proj.fromLonLat([-74.178686, 40.741117]), // incoming from left
     4:ol.proj.fromLonLat([-74.178671,40.741037]), // incoming from bottom
     6:ol.proj.fromLonLat([-74.178571, 40.741077]), // incoming from right
 };
 
-const Lock_Warren = {
+const Lock_Warren_Coordinates = {
     2: ol.proj.fromLonLat([-74.181362,40.742087]), // incoming from top
     4: ol.proj.fromLonLat([-74.181265,40.741980]), // incoming from right
     6: ol.proj.fromLonLat([-74.181408, 40.741951]), // incoming from bottom
     8: ol.proj.fromLonLat([-74.181472,40.742045]) // incoming from left
 }
 
-const Norfolk_Warren = {
+const Norfolk_Warren_Coordinates = {
     2: ol.proj.fromLonLat([-74.184492, 40.743106]), // incoming from top
     4: ol.proj.fromLonLat([-74.184601, 40.743077]), // incoming from left
     6: ol.proj.fromLonLat([-74.184546, 40.742997]), // incoming from bottom
     8: ol.proj.fromLonLat([-74.184422, 40.743028])  // incoming from right
 }
 
-const First_Street_West_Market = {
+const First_Street_West_Market_Coordinates = {
     2: ol.proj.fromLonLat([-74.189742,40.745560]),
     3: ol.proj.fromLonLat([-74.1898592,40.745531]),
     6: ol.proj.fromLonLat([-74.189798, 40.745397]),
     7: ol.proj.fromLonLat([-74.189689, 40.745424])
 }
 
-const WestMarket_Warren = {
+const WestMarket_Warren_Coordinates = {
     2: ol.proj.fromLonLat([-74.187882, 40.744230]), // incoming from top
     3: ol.proj.fromLonLat([-74.187584, 40.744114]), // incoming from right
     4: ol.proj.fromLonLat([-74.187378, 40.743888]), // incoming from bottom
     5: ol.proj.fromLonLat([-74.187835, 40.744180])
 }
 
-const Hudson_Warren = {
+const Hudson_Warren_Coordinates = {
     2: ol.proj.fromLonLat([-74.186172, 40.743599]), // incoming from right
     3: ol.proj.fromLonLat([-74.186329, 40.743652]), // incming from left
     4: ol.proj.fromLonLat([-74.186281, 40.743558]) // incoming from bottom
 }
 
-const University_Raymond = {
+const University_Raymond_Coordinates = {
     2: ol.proj.fromLonLat([-74.175305, 40.738738]), // incoming from right
     3: ol.proj.fromLonLat([-74.175475, 40.738788]), // incoming from left
     4: ol.proj.fromLonLat([ -74.175346, 40.738866]) // incoming from top
 }
 
-const Washington_Raymond = {
+const Washington_Raymond_Coordinates = {
     2: ol.proj.fromLonLat([-74.173726, 40.738241]),
     3: ol.proj.fromLonLat([-74.173898, 40.738290]),
     4: ol.proj.fromLonLat([-74.173867, 40.738174])
 }
 
-const Halsey_Raymond = {
+const Halsey_Raymond_Coordinates = {
     2: ol.proj.fromLonLat([-74.172584, 40.737908]),
     3: ol.proj.fromLonLat([-74.172718, 40.737946]),
     4: ol.proj.fromLonLat([-74.172605, 40.737983])
 }
 
-const Broad_Raymond = {
+const Broad_Raymond_Coordinates = {
     2: ol.proj.fromLonLat([-74.170743, 40.737423]), // incoming from right
     3: ol.proj.fromLonLat([-74.171124, 40.737480]), // incoming from left
     4: ol.proj.fromLonLat([-74.170990, 40.737522]),
     5: ol.proj.fromLonLat([-74.171062, 40.737398])
 }
 
-const Commerce_Raymond = {
+const Commerce_Raymond_Coordinates = {
     2: ol.proj.fromLonLat([-74.169775, 40.737152]),
     6: ol.proj.fromLonLat([-74.169630, 40.737107])
 }
 
-const Mullberry_Raymond = {
+const Mullberry_Raymond_Coordinates = {
     2: ol.proj.fromLonLat([-74.168008, 40.736618]),
     4: ol.proj.fromLonLat([-74.168031, 40.736725]),
     6: ol.proj.fromLonLat([-74.168147, 40.736658]),
     8: ol.proj.fromLonLat([-74.168114, 40.736575])
 }
 
-const McCarter_Raymond = {
+const McCarter_Raymond_Coordinates = {
     2: ol.proj.fromLonLat([-74.165857, 40.735859]),
     4: ol.proj.fromLonLat([-74.165719, 40.735878]),
     6: ol.proj.fromLonLat([-74.165805, 40.736034]),
@@ -206,51 +205,33 @@ const McCarter_Raymond = {
 }
 
 const warrenStreetPath = new Array(
-    Summit_Warren[6],Lock_Warren[4],Norfolk_Warren[4],Hudson_Warren[2],WestMarket_Warren[5],First_Street_West_Market[3]
+    Summit_Warren_Coordinates[6],Lock_Warren_Coordinates[4],Norfolk_Warren_Coordinates[4],
+    Hudson_Warren_Coordinates[2],WestMarket_Warren_Coordinates[5],First_Street_West_Market_Coordinates[3]
 );
 
 const raymondStreetPath = new Array(
-    University_Raymond[3], Washington_Raymond[2], Halsey_Raymond[2], Broad_Raymond[2], Commerce_Raymond[2], Mullberry_Raymond[2], McCarter_Raymond[4]
+    University_Raymond_Coordinates[3], Washington_Raymond_Coordinates[2], Halsey_Raymond_Coordinates[2], Broad_Raymond_Coordinates[2], 
+    Commerce_Raymond_Coordinates[2], Mullberry_Raymond_Coordinates[2], McCarter_Raymond_Coordinates[4]
 );
 
-var summitWStreet = new SignalAreas("summit_warren", summit_warren_signals, Summit_Warren, summit_warren_rotation_angles)
-var lockWStreet = new SignalAreas("lock_warren", lock_warren_signals, Lock_Warren, lock_warren_rotation_angles)
-var norfolWStreet = new SignalAreas( "norfolk_warren", norfolk_warren_signals, Norfolk_Warren, norfolk_warren_rotation_angles)
-var firstStreetWestMarket = new SignalAreas("first_street_west_market", first_street_west_market_signals, First_Street_West_Market, first_street_west_market_rotation_angles);
-var westMarketWarren = new SignalAreas("west_market_warren", west_market_warren_signals, WestMarket_Warren, west_market_warren_rotation_angles);
-var hudsonWarren = new SignalAreas("hudson_warren", hudson_warren_signals, Hudson_Warren, hudson_warren_rotation_angles);
-var universityRaymond = new SignalAreas("university_raymond", university_raymond_signals, University_Raymond, university_raymond_rotation_angles);
-var washingtonRaymond = new SignalAreas("washington_raymond", washington_raymond_signals, Washington_Raymond, washington_raymond_rotation_angles);
-var halseyRaymond = new SignalAreas("halsey_raymond", halsey_raymond_signals, Halsey_Raymond, halsey_raymond_rotation_angles);
-var broadRaymond = new SignalAreas("broad_raymond", broad_raymond_signals, Broad_Raymond, broad_raymond_rotation_angles);
-var commerceRaymond = new SignalAreas("commerce_raymond", commerce_raymond_signals, Commerce_Raymond, commerce_raymond_rotation_angles);
-var mullberryRaymond = new SignalAreas("mullberry_raymond", mullberry_raymond_signals, Mullberry_Raymond, mullberry_raymond_rotation_angles);
-var mccarterRaymond = new SignalAreas("mccarter_raymond",mccarter_raymond_signals, McCarter_Raymond, mccarter_raymond_rotation_angles);
 
-// signal colors 
-// index    color
-// 0        gree
-// 1        yellow
-// 2        red
-SIGNAL_COLORS[0] = new ol.style.Style({
-    fill: new ol.style.Fill({
-        color:'rgba(124,252,0)' 
-    })
-})
+// Creating Objects for each intersection
+var summitWStreet = new SignalAreas("summit_warren", summit_warren_signals, Summit_Warren_Coordinates, summit_warren_rotation_angles)
+var lockWStreet = new SignalAreas("lock_warren", lock_warren_signals, Lock_Warren_Coordinates, lock_warren_rotation_angles)
+var norfolWStreet = new SignalAreas( "norfolk_warren", norfolk_warren_signals, Norfolk_Warren_Coordinates, norfolk_warren_rotation_angles)
+var firstStreetWestMarket = new SignalAreas("first_street_west_market", first_street_west_market_signals, First_Street_West_Market_Coordinates, first_street_west_market_rotation_angles);
+var westMarketWarren = new SignalAreas("west_market_warren", west_market_warren_signals, WestMarket_Warren_Coordinates, west_market_warren_rotation_angles);
+var hudsonWarren = new SignalAreas("hudson_warren", hudson_warren_signals, Hudson_Warren_Coordinates, hudson_warren_rotation_angles);
+var universityRaymond = new SignalAreas("university_raymond", university_raymond_signals, University_Raymond_Coordinates, university_raymond_rotation_angles);
+var washingtonRaymond = new SignalAreas("washington_raymond", washington_raymond_signals, Washington_Raymond_Coordinates, washington_raymond_rotation_angles);
+var halseyRaymond = new SignalAreas("halsey_raymond", halsey_raymond_signals, Halsey_Raymond_Coordinates, halsey_raymond_rotation_angles);
+var broadRaymond = new SignalAreas("broad_raymond", broad_raymond_signals, Broad_Raymond_Coordinates, broad_raymond_rotation_angles);
+var commerceRaymond = new SignalAreas("commerce_raymond", commerce_raymond_signals, Commerce_Raymond_Coordinates, commerce_raymond_rotation_angles);
+var mullberryRaymond = new SignalAreas("mullberry_raymond", mullberry_raymond_signals, Mullberry_Raymond_Coordinates, mullberry_raymond_rotation_angles);
+var mccarterRaymond = new SignalAreas("mccarter_raymond",mccarter_raymond_signals, McCarter_Raymond_Coordinates, mccarter_raymond_rotation_angles);
 
-SIGNAL_COLORS[1] = new ol.style.Style({
-    fill: new ol.style.Fill({
-        color:'rgba(255,255,0)' 
-    })
-})
-
-SIGNAL_COLORS[2] = new ol.style.Style({
-    fill: new ol.style.Fill({
-        color:'rgba(242, 38, 19)' 
-    })
-})
-
-// NJIT -74.181345,40.742047
+// NJIT Co-ordinate reference -> -74.181345,40.742047
+// Map initialization
 function initMap(){
     var center = ol.proj.fromLonLat([-74.175475, 40.738788]);
     const map = new ol.Map({
@@ -296,19 +277,19 @@ function createNewFeatures(features){
 }
 
 function addColorToFeatures(features){
-    summitWStreet.addColorToFeatures(features, signal_phases[0], SIGNAL_COLORS);
-    lockWStreet.addColorToFeatures(features, signal_phases[1],SIGNAL_COLORS);
-    norfolWStreet.addColorToFeatures(features, signal_phases[2], SIGNAL_COLORS);
-    firstStreetWestMarket.addColorToFeatures(features, signal_phases[3], SIGNAL_COLORS);
-    westMarketWarren.addColorToFeatures(features, signal_phases[4], SIGNAL_COLORS);
-    hudsonWarren.addColorToFeatures(features, signal_phases[5], SIGNAL_COLORS);
-    universityRaymond.addColorToFeatures(features, signal_phases[6], SIGNAL_COLORS);
-    washingtonRaymond.addColorToFeatures(features, signal_phases[7], SIGNAL_COLORS);
-    halseyRaymond.addColorToFeatures(features, signal_phases[8], SIGNAL_COLORS);
-    broadRaymond.addColorToFeatures(features, signal_phases[9], SIGNAL_COLORS);
-    commerceRaymond.addColorToFeatures(features, signal_phases[10], SIGNAL_COLORS);
-    mullberryRaymond.addColorToFeatures(features, signal_phases[11], SIGNAL_COLORS);
-    mccarterRaymond.addColorToFeatures(features, signal_phases[12],SIGNAL_COLORS);
+    summitWStreet.addColorToFeatures(features, signal_phases[0]);
+    lockWStreet.addColorToFeatures(features, signal_phases[1]);
+    norfolWStreet.addColorToFeatures(features, signal_phases[2]);
+    firstStreetWestMarket.addColorToFeatures(features, signal_phases[3]);
+    westMarketWarren.addColorToFeatures(features, signal_phases[4]);
+    hudsonWarren.addColorToFeatures(features, signal_phases[5]);
+    universityRaymond.addColorToFeatures(features, signal_phases[6]);
+    washingtonRaymond.addColorToFeatures(features, signal_phases[7]);
+    halseyRaymond.addColorToFeatures(features, signal_phases[8]);
+    broadRaymond.addColorToFeatures(features, signal_phases[9]);
+    commerceRaymond.addColorToFeatures(features, signal_phases[10]);
+    mullberryRaymond.addColorToFeatures(features, signal_phases[11]);
+    mccarterRaymond.addColorToFeatures(features, signal_phases[12]);
 }
 
 function addFeaturesToVectorSource(features){
@@ -334,6 +315,7 @@ function addFeatureToVectorSource(signalAreaObj, features){
     return features;
 }
 
+// Dynamically adding click event to radio button
 function addEventToRadioButtons(){
     var radio = document.getElementById('warren');
     radio.onclick = function(){
@@ -349,6 +331,8 @@ function addEventToRadioButtons(){
     }
 }
 
+// method that responds to click event on radio buttons
+// This method is not stable yet, still working on it
 function createPath(pathValue){
     var style = new ol.style.Style({
         stroke: new ol.style.Stroke({
@@ -365,7 +349,7 @@ function createPath(pathValue){
         // breakRaymond();    
     }else if(pathValue == 1){
         line = new ol.Feature({
-        geometry: new ol.geom.LineString(raymondStreetPath),
+            geometry: new ol.geom.LineString(raymondStreetPath),
         });
         // breakWarren();
         createChartRaymond();
@@ -379,19 +363,18 @@ function createPath(pathValue){
     }
 }
 
-function repeatingLoop(){
+// Method that reloads data every second on the map
+function startLoop(){
     signal_phases = []
     signal_phases = fetchData();
-    // summit_remaining_time = tempObj['signal_remaining_time'];
-    // console.log(summit_re)
     LayDataOnMap();
-    setTimeout(repeatingLoop,1000);
+    setTimeout(startLoop,1000);
 }
 
 function main(){
     initMap();
     addEventToRadioButtons();
-    repeatingLoop();
+    startLoop();
 }
 
 main();

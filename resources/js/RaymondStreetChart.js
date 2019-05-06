@@ -5,32 +5,39 @@ var run;
 var loop;
 
 var dataPointObject = {
-    xVal:0,
+    
     university_raymond:{
+        xVal:0,
         yVal:10,
         dps:[]
     },
     washington_raymond:{
+        xVal:0,
         yVal:20,
         dps:[]
     },
     halsey_raymond:{
+        xVal:0,
         yVal:30,
         dps:[]
     },
     broad_raymond:{
+        xVal:0,
         yVal:40,
         dps:[]
     },
     commerce_raymond:{
+        xVal:0,
         yVal:50,
         dps:[]
     },
     mulberry_raymond:{
+        xVal:0,
         yVal:60,
         dps:[]
     },
     mccarter_raymond:{
+        xVal:0,
         yVal:70,
         dps:[]
     }
@@ -132,16 +139,12 @@ function startLoop(){
         loop = setTimeout(startLoop, 1000);
     }else{
         clearInterval(loop);
-        dataPointObject.university_raymond.dps = []
-        dataPointObject.washington_raymond.dps = []
-        dataPointObject.halsey_raymond.dps = []
-        dataPointObject.broad_raymond.dps = []
-        dataPointObject.commerce_raymond.dps = []
-        dataPointObject.mulberry_raymond.dps = []
-        dataPointObject.mccarter_raymond.dps = []
+        for(var x in dataPointObject){
+            dataPointObject[x].dps = [];
+            dataPointObject[x].xVal = 0;
+        }
         chart.destroy();
         chart = null;
-        dataPointObject.xVal = 0;
     }
 }
 
@@ -150,45 +153,35 @@ export function breakRaymond(){
 }
 
 function updateChart(){
-    // var adjuster;
 
     var x = getSignalIndex(signal_phases[6],2);
-    // adjuster = yAdjuster(x);
-    dataPointObject.university_raymond.dps.push({x : dataPointObject.xVal, y : dataPointObject.university_raymond.yVal, lineColor: color[x], color: color[x]});
+    dataPointObject.university_raymond.dps.push({x : dataPointObject.university_raymond.xVal, y : dataPointObject.university_raymond.yVal, lineColor: color[x], color: color[x]});
     
     x = getSignalIndex(signal_phases[7],2);
-    // adjuster = yAdjuster(x);
-    dataPointObject.washington_raymond.dps.push({x:dataPointObject.xVal, y: dataPointObject.washington_raymond.yVal,  lineColor: color[x], color: color[x]});
+    dataPointObject.washington_raymond.dps.push({x:dataPointObject.washington_raymond.xVal, y: dataPointObject.washington_raymond.yVal,  lineColor: color[x], color: color[x]});
     
     x = getSignalIndex(signal_phases[8],2);
-    // adjuster = yAdjuster(x);
-    dataPointObject.halsey_raymond.dps.push({x:dataPointObject.xVal, y:dataPointObject.halsey_raymond.yVal, lineColor: color[x], color: color[x]});
+    dataPointObject.halsey_raymond.dps.push({x:dataPointObject.halsey_raymond.xVal, y:dataPointObject.halsey_raymond.yVal, lineColor: color[x], color: color[x]});
 
     x = getSignalIndex(signal_phases[9],2);
-    // adjuster = yAdjuster(x);
-    dataPointObject.broad_raymond.dps.push({x:dataPointObject.xVal,y:dataPointObject.broad_raymond.yVal, lineColor:color[x], color:color[x]});
+    dataPointObject.broad_raymond.dps.push({x:dataPointObject.broad_raymond.xVal,y:dataPointObject.broad_raymond.yVal, lineColor:color[x], color:color[x]});
     
     x = getSignalIndex(signal_phases[10],2);
-    // adjuster = yAdjuster(x);
-    dataPointObject.commerce_raymond.dps.push({x:dataPointObject.xVal, y: dataPointObject.commerce_raymond.yVal, lineColor: color[x], color:color[x]});
+    dataPointObject.commerce_raymond.dps.push({x:dataPointObject.commerce_raymond.xVal, y: dataPointObject.commerce_raymond.yVal, lineColor: color[x], color:color[x]});
 
     x = getSignalIndex(signal_phases[11],6);
-    // adjuster = yAdjuster(x);
-    dataPointObject.mulberry_raymond.dps.push({x:dataPointObject.xVal, y: dataPointObject.mulberry_raymond.yVal, lineColor: color[x], color:color[x]});
+    dataPointObject.mulberry_raymond.dps.push({x:dataPointObject.mulberry_raymond.xVal, y: dataPointObject.mulberry_raymond.yVal, lineColor: color[x], color:color[x]});
 
     x = getSignalIndex(signal_phases[12],8);
-    // adjuster = yAdjuster(x);
-    dataPointObject.mccarter_raymond.dps.push({x:dataPointObject.xVal, y: dataPointObject.mccarter_raymond.yVal, lineColor: color[x], color:color[x]});
+    dataPointObject.mccarter_raymond.dps.push({x:dataPointObject.mccarter_raymond.xVal, y: dataPointObject.mccarter_raymond.yVal, lineColor: color[x], color:color[x]});
 
-    dataPointObject.xVal++;
+    for(var x in dataPointObject){
+        dataPointObject[x].xVal++;
+    }
     if(dataPointObject.university_raymond.dps.length > 30){
-        dataPointObject.university_raymond.dps.shift();
-        dataPointObject.washington_raymond.dps.shift();
-        dataPointObject.halsey_raymond.dps.shift();
-        dataPointObject.broad_raymond.dps.shift();
-        dataPointObject.commerce_raymond.dps.shift();
-        dataPointObject.mulberry_raymond.dps.shift();
-        dataPointObject.mccarter_raymond.dps.shift();
+        for(var x in dataPointObject){
+            dataPointObject[x].dps.shift();
+        }
     }
     chart.render();
 }
@@ -205,16 +198,4 @@ function getSignalIndex(signals, signal_number){
         }
     }
     return index;
-}
-
-function yAdjuster(x){
-    var y;
-    if(x==0){
-        y = 3
-    }else if(x==2){
-        y = -3
-    }else{
-        y = 0
-    }
-    return y;
 }
