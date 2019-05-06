@@ -196,9 +196,11 @@ function updateChart(){
 function getSignalIndex(signals, signal_number){
     var index;
     for(var i = 0; i<signals.length; i++){
-        for(var j = 0; j< signals[i].length; j++){
-            if(signals[i][j] === signal_number){
-                index = i;
+        if(signals[i] != null){
+            for(var j = 0; j< signals[i].length; j++){
+                if(signals[i][j] === signal_number){
+                    index = i;
+                }
             }
         }
     }

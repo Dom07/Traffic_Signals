@@ -49,7 +49,6 @@ var streetName = {
 
 export function createChartWarren(){
     run = true;
-    console.log(chart);
     if(chart == null){
         chart = new CanvasJS.Chart("myChart", {
             title:{
@@ -151,11 +150,11 @@ function updateChart(){
     // adjuster = yAdjuster(x);
     dataPointObject.norfolk_warren.dps.push({x:dataPointObject.xVal, y:dataPointObject.norfolk_warren.yVal, lineColor: color[x], color: color[x]});
 
-    x = getSignalIndex(signal_phases[3],4);
+    x = getSignalIndex(signal_phases[3],2);
     // adjuster = yAdjuster(x);
     dataPointObject.hudson_warren.dps.push({x:dataPointObject.xVal,y:dataPointObject.hudson_warren.yVal, lineColor:color[x], color:color[x]});
     
-    x = getSignalIndex(signal_phases[4],4);
+    x = getSignalIndex(signal_phases[4],2);
     // adjuster = yAdjuster(x);
     dataPointObject.west_market_warren.dps.push({x:dataPointObject.xVal, y: dataPointObject.west_market_warren.yVal, lineColor: color[x], color:color[x]});
 
@@ -178,9 +177,11 @@ function updateChart(){
 function getSignalIndex(signals, signal_number){
     var index;
     for(var i = 0; i<signals.length; i++){
-        for(var j = 0; j< signals[i].length; j++){
-            if(signals[i][j] === signal_number){
-                index = i;
+        if(signals[i] != null){
+            for(var j = 0; j< signals[i].length; j++){
+                if(signals[i][j] === signal_number){
+                    index = i;
+                }
             }
         }
     }
